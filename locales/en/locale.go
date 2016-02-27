@@ -2,18 +2,21 @@ package locale_en
 
 import (
 	"github.com/raitucarp/faker/locales/en/address"
+	"github.com/raitucarp/faker/locales/en/commerce"
 	"github.com/raitucarp/faker/locales/en/name"
 )
 
 type definitions struct {
-	Name    interface{}
-	Address interface{}
+	Name     interface{}
+	Address  interface{}
+	Commerce interface{}
 }
 
 func Export() interface{} {
 	d := definitions{
-		Name:    name.Export(),
-		Address: address.Export(),
+		Name:     name.Export(),
+		Address:  address.Export(),
+		Commerce: commerce.Export(),
 	}
 
 	return d
