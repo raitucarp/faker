@@ -60,6 +60,13 @@ func defaultLocaleData(step ...string) (values []string) {
 	return
 }
 
+func round(val float64) int {
+	if val < 0 {
+		return int(val - 0.5)
+	}
+	return int(val + 0.5)
+}
+
 func getData(field ...string) (values []string) {
 	// clone of data
 	dat := data
