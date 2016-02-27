@@ -111,12 +111,16 @@ func sample(list []string) string {
 		return ""
 	}
 
-	listLength := len(list)
-	nano := time.Now().UTC().UnixNano()
-	rand.Seed(nano)
-	firstName := rand.Perm(listLength)
-	chosen := firstName[0]
+	permList := permlist(list)
+	chosen := permList[0]
 	return list[chosen]
+}
+
+func permlist(list []string) []int {
+	nano := time.Now().UTC().Second()
+	rand.Seed(int64(nano) + int64(rand.Int()))
+	permList := rand.Perm(len(list))
+	return permList
 }
 
 func replaceSymbolsWithNumber(s string, symbol rune) (result string) {
