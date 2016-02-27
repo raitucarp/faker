@@ -97,7 +97,7 @@ func TestCommerce(t *testing.T) {
 	tbl.Render()
 
 	// logging
-	t.Log("Fake Address\n", tbl.String())
+	t.Log("Fake Commerce\n", tbl.String())
 }
 
 func TestName(t *testing.T) {
