@@ -74,7 +74,31 @@ func TestAddress(t *testing.T) {
 	t.Log("Fake Address\n", tbl.String())
 }
 
+func TestCommerce(t *testing.T) {
+	f := faker.New()
+	tbl := NewTable()
+	tbl.SetHeader("Field Name", "Data")
+	tbl.AddData("Color", f.Commerce.Color_())
+	tbl.AddData("Department", f.Commerce.Department_())
+	tbl.AddData("ProductName", f.Commerce.ProductName_())
+	tbl.AddData("Price", f.Commerce.Price_(20000, 3, "$"))
+	tbl.AddData("ProductAdjective", f.Commerce.ProductAdjective_())
+	tbl.AddData("ProductMaterial", f.Commerce.ProductMaterial_())
+	tbl.AddData("Product", f.Commerce.Product_())
 
+	JSON, err := f.Commerce.ToJSON()
+	checkError(t, err)
+	tbl.AddData("JSON", JSON)
+
+	XML, err := f.Commerce.ToXML()
+	checkError(t, err)
+	tbl.AddData("XML", XML)
+
+	tbl.Render()
+
+	// logging
+	t.Log("Fake Address\n", tbl.String())
+}
 
 func TestName(t *testing.T) {
 	f := faker.New()
