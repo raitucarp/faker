@@ -16,9 +16,10 @@ type Faker struct {
 	Name     Name
 	Address  Address
 	Commerce Commerce
+	Company  Company
 
 	// temp data handling
-	data interface{}
+	data     interface{}
 }
 
 type Definitions map[string]interface{}
