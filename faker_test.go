@@ -5,6 +5,7 @@ import (
 	"github.com/olekukonko/tablewriter"
 	"github.com/raitucarp/faker"
 	"testing"
+	"strings"
 )
 
 type Table struct {
@@ -98,6 +99,28 @@ func TestCommerce(t *testing.T) {
 
 	// logging
 	t.Log("Fake Commerce\n", tbl.String())
+}
+
+func TestCompany(t *testing.T) {
+	f := faker.New()
+	tbl := NewTable()
+	tbl.SetHeader("Field Name", "Data")
+	tbl.AddData("Suffixes", strings.Join(f.Company.Suffixes_(), ","))
+	tbl.AddData("CompanyName", f.Company.CompanyName_())
+	tbl.AddData("CompanySuffix", f.Company.CompanySuffix_())
+	tbl.AddData("CatchPhrase", f.Company.CatchPhrase_())
+	tbl.AddData("CatchPhraseAdjective", f.Company.CatchPhraseAdjective_())
+	tbl.AddData("CatchPhraseDescriptor", f.Company.CatchPhraseAdjective_())
+	tbl.AddData("CatchPhraseNoun", f.Company.CatchPhraseNoun_())
+	tbl.AddData("Bs", f.Company.BS_())
+	tbl.AddData("BsAdjective", f.Company.BsAdjective_())
+	tbl.AddData("BsBuzz", f.Company.BsBuzz_())
+	tbl.AddData("BsNoun", f.Company.BsNoun_())
+	tbl.Render()
+
+	// logging
+	t.Log("Fake Company\n", tbl.String())
+
 }
 
 func TestName(t *testing.T) {
