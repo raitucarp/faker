@@ -13,8 +13,9 @@ const (
 var gender Gender
 
 type Faker struct {
-	Name    Name
-	Address Address
+	Name     Name
+	Address  Address
+	Commerce Commerce
 
 	// temp data handling
 	data interface{}
