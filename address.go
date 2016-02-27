@@ -21,7 +21,7 @@ type Street struct {
 
 type Address struct {
 	ZipCode     string `json:"zip_code"`
-	City        City `json:"city"`
+	City        City   `json:"city"`
 	Street      Street `json:"street"`
 	Secondary   string `json:"secondary_address"`
 	County      string `json:"county"`
