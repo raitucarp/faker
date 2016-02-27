@@ -59,12 +59,22 @@ func TestAddress(t *testing.T) {
 	tbl.AddData("StateAbbr", f.Address.StateAbbr_())
 	tbl.AddData("Latitude", f.Address.Latitude_())
 	tbl.AddData("Longitude", f.Address.Longitude_())
+
+	JSON, err := f.Address.ToJSON()
+	checkError(t, err)
+	tbl.AddData("JSON", JSON)
+
+	XML, err := f.Address.ToXML()
+	checkError(t, err)
+	tbl.AddData("XML", XML)
+
 	tbl.Render()
 
 	// logging
 	t.Log("Fake Address\n", tbl.String())
-
 }
+
+
 
 func TestName(t *testing.T) {
 	f := faker.New()
