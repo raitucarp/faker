@@ -8,29 +8,29 @@ import (
 )
 
 type City struct {
-	Prefix string
-	Suffix string
+	Prefix string `json:"prefix"`
+	Suffix string `json:"suffix"`
 }
 
 type Street struct {
-	Name    string
-	Address string
-	Prefix  string
-	Suffix  string
+	Name    string `json:"name"`
+	Address string `json:"address"`
+	Prefix  string `json:"prefix"`
+	Suffix  string `json:"suffix"`
 }
 
 type Address struct {
-	ZipCode     string
-	City        City
-	Street      Street
-	Secondary   string
-	County      string
-	Country     string
-	CountryCode string
-	State       string
-	StateAbbr   string
-	Latitude    string
-	Longitude   string
+	ZipCode     string `json:"zip_code"`
+	City        City `json:"city"`
+	Street      Street `json:"street"`
+	Secondary   string `json:"secondary_address"`
+	County      string `json:"county"`
+	Country     string `json:"country"`
+	CountryCode string `json:"country_code"`
+	State       string `json:"state"`
+	StateAbbr   string `json:"state_abbr"`
+	Latitude    string `json:"latitude"`
+	Longitude   string `json:"longitude"`
 }
 
 func (addr *Address) Fake() {
