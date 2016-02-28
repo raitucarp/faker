@@ -1,6 +1,6 @@
 package company
 
-var bsAdjective = []string {
+var bsAdjective = []string{
 	"clicks-and-mortar",
 	"value-added",
 	"vertical",

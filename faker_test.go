@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"github.com/olekukonko/tablewriter"
 	"github.com/raitucarp/faker"
-	"testing"
 	"strings"
+	"testing"
 )
 
 type Table struct {

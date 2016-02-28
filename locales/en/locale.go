@@ -19,7 +19,7 @@ func Export() interface{} {
 		Name:     name.Export(),
 		Address:  address.Export(),
 		Commerce: commerce.Export(),
-		Company: company.Export(),
+		Company:  company.Export(),
 	}
 
 	return d

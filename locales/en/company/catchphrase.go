@@ -1,18 +1,18 @@
 package company
 
 type catchPhrase struct {
-	Template []string
-	Adjective []string
+	Template   []string
+	Adjective  []string
 	Descriptor []string
-	Noun []string
+	Noun       []string
 }
 
 var catchPhraseTemplate = []string{
 	"#{.Company.CatchPhrase.Adjective} #{.Company.CatchPhrase.Descriptor} #{.Company.CatchPhrase.Noun}",
 }
 var CatchPhrase = catchPhrase{
-	Template: catchPhraseTemplate,
-	Adjective: Adjective,
+	Template:   catchPhraseTemplate,
+	Adjective:  Adjective,
 	Descriptor: Descriptor,
-	Noun: Noun,
+	Noun:       Noun,
 }

@@ -8,14 +8,14 @@ type CatchPhrase struct {
 
 type BusinessSlogan struct {
 	Adjective string
-	Buzz string
-	Noun string
+	Buzz      string
+	Noun      string
 }
 
 type Company struct {
-	Name string
-	Suffix string
-	CatchPhrase CatchPhrase
+	Name           string
+	Suffix         string
+	CatchPhrase    CatchPhrase
 	BusinessSlogan BusinessSlogan
 }
 
