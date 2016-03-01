@@ -17,6 +17,10 @@ type Faker struct {
 	Address  Address
 	Commerce Commerce
 	Company  Company
+	Date     Date
+	Finance  Finance
+	Hacker   Hacker
+	Image    Image
 
 	// temp data handling
 	data interface{}
