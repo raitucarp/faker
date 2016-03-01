@@ -67,6 +67,34 @@ func round(val float64) int {
 	return int(val + 0.5)
 }
 
+func call(field ...string) (result map[string]string) {
+	// clone of data
+	dat := data
+
+	// field name length
+	fieldLength := len(field) - 1
+
+	// iterate field args
+	for index, name := range field {
+		immutable := reflect.ValueOf(dat)
+		if index == fieldLength {
+			method := immutable.MethodByName(name)
+			if method.IsValid() {
+				r := method.Call([]reflect.Value{})
+
+				result = r[0].Interface().(map[string]string)
+				return
+			} else {
+				return
+			}
+		} else {
+			val := immutable.FieldByName(name)
+			dat = val.Interface()
+		}
+	}
+	return
+}
+
 func getData(field ...string) (values []string) {
 	// clone of data
 	dat := data
@@ -97,6 +125,7 @@ func getData(field ...string) (values []string) {
 		}
 
 		if index == fieldLength {
+
 			return val.Interface().([]string)
 		} else {
 			dat = val.Interface()
@@ -111,16 +140,23 @@ func sample(list []string) string {
 		return ""
 	}
 
-	permList := permlist(list)
-	chosen := permList[0]
-	return list[chosen]
+	r := random(0, len(list))
+
+	return list[r]
 }
 
-func permlist(list []string) []int {
-	nano := time.Now().UTC().Second()
-	rand.Seed(int64(nano) + int64(rand.Int()))
-	permList := rand.Perm(len(list))
-	return permList
+func random(min, max int) int {
+	rand.Seed(time.Now().Unix() + int64(rand.Int()))
+	return rand.Intn(max-min) + min
+}
+
+func typeof(p ...interface{}) (types []reflect.Kind) {
+
+	for i := 0; i < len(p); i++ {
+		t := reflect.TypeOf(p[i]).Kind()
+		types = append(types, t)
+	}
+	return
 }
 
 func replaceSymbolsWithNumber(s string, symbol rune) (result string) {
