@@ -6,6 +6,7 @@ import (
 	"github.com/raitucarp/faker"
 	"strings"
 	"testing"
+	//"time"
 )
 
 type Table struct {
@@ -61,13 +62,13 @@ func TestAddress(t *testing.T) {
 	tbl.AddData("Latitude", f.Address.Latitude_())
 	tbl.AddData("Longitude", f.Address.Longitude_())
 
-	JSON, err := f.Address.ToJSON()
+	/*JSON, err := f.Address.ToJSON()
 	checkError(t, err)
 	tbl.AddData("JSON", JSON)
 
 	XML, err := f.Address.ToXML()
 	checkError(t, err)
-	tbl.AddData("XML", XML)
+	tbl.AddData("XML", XML)*/
 
 	tbl.Render()
 
@@ -87,13 +88,13 @@ func TestCommerce(t *testing.T) {
 	tbl.AddData("ProductMaterial", f.Commerce.ProductMaterial_())
 	tbl.AddData("Product", f.Commerce.Product_())
 
-	JSON, err := f.Commerce.ToJSON()
+	/*JSON, err := f.Commerce.ToJSON()
 	checkError(t, err)
 	tbl.AddData("JSON", JSON)
 
 	XML, err := f.Commerce.ToXML()
 	checkError(t, err)
-	tbl.AddData("XML", XML)
+	tbl.AddData("XML", XML)*/
 
 	tbl.Render()
 
@@ -105,7 +106,7 @@ func TestCompany(t *testing.T) {
 	f := faker.New()
 	tbl := NewTable()
 	tbl.SetHeader("Field Name", "Data")
-	tbl.AddData("Suffixes", strings.Join(f.Company.Suffixes_(), ","))
+	tbl.AddData("Suffixes", strings.Join(f.Company.Suffixes_(), ", "))
 	tbl.AddData("CompanyName", f.Company.CompanyName_())
 	tbl.AddData("CompanySuffix", f.Company.CompanySuffix_())
 	tbl.AddData("CatchPhrase", f.Company.CatchPhrase_())
@@ -121,6 +122,89 @@ func TestCompany(t *testing.T) {
 	// logging
 	t.Log("Fake Company\n", tbl.String())
 
+}
+
+func TestDate(t *testing.T) {
+	d := faker.Date{}
+	tbl := NewTable()
+
+	tbl.SetHeader("Field Name", "Data")
+	tbl.AddData("Past", d.Past_().String())
+	tbl.AddData("Future", d.Future_().String())
+	tbl.AddData("Between", d.Between_("02/21/2016", "02/22/2016", "01/02/2006").String())
+	tbl.AddData("Recent", d.Recent_(1).String())
+	tbl.AddData("Month", d.Month_())
+	tbl.AddData("Weekday", d.Weekday_())
+
+	tbl.Render()
+	// logging
+	t.Log("Fake Date\n", tbl.String())
+}
+
+func TestFinance(t *testing.T) {
+	f := faker.Finance{}
+
+	tbl := NewTable()
+
+	tbl.SetHeader("Field Name", "Data")
+	tbl.AddData("Account", f.Account_())
+	tbl.AddData("Account Name", f.AccountName_())
+	tbl.AddData("Amount", f.Amount_())
+	tbl.AddData("Mask", f.Mask_())
+	tbl.AddData("TransactionType", f.TransactionType_())
+	tbl.AddData("CurrencySymbol", f.CurrencySymbol_())
+	tbl.AddData("CurrencyCode", f.CurrencyCode_())
+	tbl.AddData("CurrencyName", f.CurrencyName_())
+
+	tbl.Render()
+	// logging
+	t.Log("Fake Finance\n", tbl.String())
+}
+
+func TestHacker(t *testing.T) {
+	hacker := faker.Hacker{}
+
+	tbl := NewTable()
+
+	tbl.SetHeader("Field Name", "Data")
+	tbl.AddData("Abbreviation", hacker.Abbreviation_())
+	tbl.AddData("Adjective", hacker.Adjective_())
+	tbl.AddData("Noun", hacker.Noun_())
+	tbl.AddData("Verb", hacker.Verb_())
+	tbl.AddData("IngVerb", hacker.IngVerb_())
+	tbl.AddData("Phrase", hacker.Phrase_())
+
+	tbl.Render()
+	// logging
+	t.Log("Fake Hacker\n", tbl.String())
+}
+
+func TestImage(t *testing.T) {
+	image := faker.Image{}
+
+	tbl := NewTable()
+
+	tbl.SetHeader("Field Name", "Data")
+	tbl.AddData("Image", image.Image_(1028, 728))
+	//tbl.AddData("avatar", image.Image_())
+	tbl.AddData("imageUrl", image.ImageURL("abstract"))
+	tbl.AddData("abstract", image.Abstract_())
+	tbl.AddData("animals", image.Animals_())
+	tbl.AddData("business", image.Business_())
+	tbl.AddData("cats", image.Cats_())
+	tbl.AddData("city", image.City_())
+	tbl.AddData("food", image.Food_())
+	tbl.AddData("nightlife", image.Nightlife_())
+	tbl.AddData("fashion", image.Fashion_())
+	tbl.AddData("people", image.People_())
+	tbl.AddData("nature", image.Nature_())
+	tbl.AddData("sports", image.Sports_())
+	tbl.AddData("technics", image.Technics_())
+	tbl.AddData("transport", image.Transport_())
+
+	tbl.Render()
+	// logging
+	t.Log("Fake Image\n", tbl.String())
 }
 
 func TestName(t *testing.T) {
@@ -139,13 +223,13 @@ func TestName(t *testing.T) {
 	tbl.AddData("JobArea", f.Name.JobArea_())
 	tbl.AddData("JobType", f.Name.JobType_())
 
-	JSON, err := f.Name.ToJSON()
+	/*JSON, err := f.Name.ToJSON()
 	checkError(t, err)
 	tbl.AddData("JSON", JSON)
 
 	XML, err := f.Name.ToXML()
 	checkError(t, err)
-	tbl.AddData("XML", XML)
+	tbl.AddData("XML", XML)*/
 
 	tbl.Render()
 
