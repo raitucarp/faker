@@ -1,6 +1,6 @@
 package address
 
-type definitions struct {
+type Definitions struct {
 	PostCode, CityPrefix, CitySuffix,
 	City, StreetSuffix, BuildingNumber,
 	StreetAddress, SecondaryAddress, County,
@@ -8,8 +8,8 @@ type definitions struct {
 	StateAbbr []string
 }
 
-func Export() interface{} {
-	def := definitions{
+func Export() Definitions {
+	def := Definitions{
 		PostCode:         PostCode,
 		CityPrefix:       CityPrefix,
 		CitySuffix:       CitySuffix,
@@ -27,22 +27,3 @@ func Export() interface{} {
 
 	return def
 }
-
-/*type AddressMethod struct {}
-
-func (m *AddressMethod) PostCode()  {
-	return postCode
-}
-
-func (m *AddressMethod) CityPrefix()  {
-	return cityPrefix
-}
-
-func (m *AddressMethod) City()  {
-	return city
-}
-
-func (m *AddressMethod) CitySuffix()  {
-	return citySuffix
-}
-*/

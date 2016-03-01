@@ -1,14 +1,14 @@
 package company
 
-type definitions struct {
+type Definitions struct {
 	Suffix         []string
 	Name           []string
 	CatchPhrase    catchPhrase
 	BusinessSlogan businessSlogan
 }
 
-func Export() interface{} {
-	def := definitions{
+func Export() Definitions {
+	def := Definitions{
 		Suffix:         Suffix,
 		Name:           Name,
 		CatchPhrase:    CatchPhrase,

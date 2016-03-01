@@ -8,12 +8,12 @@ const (
 	EN = "EN"
 )
 
-type definitions struct {
-	EN interface{}
+type Definitions struct {
+	EN locale_en.Definitions
 }
 
-func Export() interface{} {
-	def := definitions{
+func Export() Definitions {
+	def := Definitions{
 		EN: locale_en.Export(),
 	}
 	return def

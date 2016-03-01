@@ -1,13 +1,13 @@
 package commerce
 
-type definitions struct {
+type Definitions struct {
 	Color       []string
 	Department  []string
 	ProductName productName
 }
 
-func Export() interface{} {
-	def := definitions{
+func Export() Definitions {
+	def := Definitions{
 		Color:       Color,
 		Department:  Department,
 		ProductName: ProductName,
