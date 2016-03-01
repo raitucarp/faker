@@ -1,6 +1,6 @@
 package name
 
-type definitions struct {
+type Definitions struct {
 	FirstName []string
 	LastName  []string
 	Prefix    []string
@@ -8,8 +8,8 @@ type definitions struct {
 	Title     title
 }
 
-func Export() interface{} {
-	def := definitions{
+func Export() Definitions {
+	def := Definitions{
 		FirstName: FirstName,
 		LastName:  LastName,
 		Prefix:    Prefix,
@@ -19,60 +19,3 @@ func Export() interface{} {
 
 	return def
 }
-
-/*type definitions struct {
-	FirstName []string
-	LastName  []string
-	Prefix    []string
-	Suffix    []string
-	Title     map[string][]string
-}
-
-func Definitions() definitions {
-	d := definitions{}
-	d.FirstName = firstName
-	d.LastName = lastName
-	d.Prefix = prefix
-	d.Suffix = suffix
-	d.Title = title
-}
-
-func Export() interface{} {
-	def := definitions{}
-	def.FirstName = firstName
-	def.LastName = lastName
-	def.Prefix = prefix
-	def.Suffix = suffix
-	def.Title = title
-	return def
-}
-
-var Definitions = map[string]interface{}{
-	"FirstName": firstName,
-	"LastName": lastName,
-	"Prefix": prefix,
-	"Suffix": suffix,
-	"Title": title,
-}
-
-type NameMethod struct {}
-
-func (m *NameMethod) FirstName() []string{
-	return firstName
-}
-
-func (m *NameMethod) LastName() []string {
-	return lastName
-}
-
-func (m *NameMethod) Prefix() []string {
-	return prefix
-}
-
-func (m *NameMethod) Suffix() []string {
-	return suffix
-}
-
-func (m *NameMethod) Title() map[string][]string {
-	return title
-}*/
