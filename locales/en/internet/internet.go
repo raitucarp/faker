@@ -1,20 +1,20 @@
 package internet
 
 type Definitions struct {
-	AvatarUri []string
+	AvatarUri    []string
 	DomainSuffix domainTld
-	FreeEmail []string
+	FreeEmail    []string
 	ExampleEmail []string
-	Protocol []string
+	Protocol     []string
 }
 
 func Export() Definitions {
 	def := Definitions{
-		AvatarUri: AvatarUri,
+		AvatarUri:    AvatarUri,
 		DomainSuffix: DomainSuffix,
-		FreeEmail: FreeEmail,
+		FreeEmail:    FreeEmail,
 		ExampleEmail: ExampleEmail,
-		Protocol: Protocol,
+		Protocol:     Protocol,
 	}
 	return def
 }

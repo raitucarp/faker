@@ -2,7 +2,7 @@ package internet
 
 type domainTld struct {
 	Generic []string
-	All []string
+	All     []string
 }
 
 var DomainSuffix = domainTld{
