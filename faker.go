@@ -23,7 +23,7 @@ type Faker struct {
 	Image    Image
 	Internet Internet
 	Lorem    Lorem
-
+	Phone    Phone
 	// temp data handling
 	data interface{}
 }
