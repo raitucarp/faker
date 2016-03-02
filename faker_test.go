@@ -207,6 +207,30 @@ func TestImage(t *testing.T) {
 	t.Log("Fake Image\n", tbl.String())
 }
 
+func TestInternet(t *testing.T) {
+	internet := faker.Internet{}
+
+	tbl := NewTable()
+
+	tbl.SetHeader("Field Name", "Data")
+	tbl.AddData("Avatar", internet.Avatar_())
+	tbl.AddData("Email", internet.Email_())
+	tbl.AddData("Username", internet.Username_())
+	tbl.AddData("Protocol", internet.Protocol_())
+	tbl.AddData("URL", internet.URL_())
+	tbl.AddData("DomainName", internet.DomainName_())
+	tbl.AddData("DomainSuffix", internet.DomainSuffix_())
+	tbl.AddData("DomainWord", internet.DomainWord_())
+	tbl.AddData("DomainWord", internet.IP_())
+	//tbl.AddData("UserAgent", internet.IP_())
+	tbl.AddData("Color", internet.Color_())
+	tbl.AddData("Mac", internet.Mac_())
+	//tbl.AddData("Password", internet.IP_())
+	tbl.Render()
+	// logging
+	t.Log("Fake Internet\n", tbl.String())
+}
+
 func TestName(t *testing.T) {
 	f := faker.New()
 
