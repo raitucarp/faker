@@ -9,6 +9,7 @@ import (
 	"strings"
 	"text/template"
 	"time"
+	"regexp"
 )
 
 func Fake(s string) (result string, err error) {
@@ -185,4 +186,14 @@ func replaceSymbols(symbol string) (s string) {
 		}
 	}
 	return s
+}
+
+func Slugify(s string) string {
+	r := regexp.MustCompile(`\s`)
+	newString := r.ReplaceAllString(s, `-`)
+
+	r2 := regexp.MustCompile(`[^\w\.\-]+`)
+	result := r2.ReplaceAllString(newString, "")
+
+	return result
 }
