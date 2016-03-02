@@ -9,7 +9,6 @@ import (
 	"strconv"
 	"strings"
 	"text/template"
-	"time"
 )
 
 func Fake(s string) (result string, err error) {
@@ -144,11 +143,6 @@ func sample(list []string) string {
 	r := random(0, len(list))
 
 	return list[r]
-}
-
-func random(min, max int) int {
-	rand.Seed(time.Now().Unix() + int64(rand.Int()))
-	return rand.Intn(max-min) + min
 }
 
 func typeof(p ...interface{}) (types []reflect.Kind) {
