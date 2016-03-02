@@ -21,6 +21,7 @@ type Faker struct {
 	Finance  Finance
 	Hacker   Hacker
 	Image    Image
+	Internet Internet
 
 	// temp data handling
 	data interface{}
