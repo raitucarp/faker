@@ -5,11 +5,11 @@ import (
 	"github.com/raitucarp/faker/locales"
 	"math/rand"
 	"reflect"
+	"regexp"
 	"strconv"
 	"strings"
 	"text/template"
 	"time"
-	"regexp"
 )
 
 func Fake(s string) (result string, err error) {
