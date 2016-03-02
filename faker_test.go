@@ -294,6 +294,19 @@ func TestRandom(t *testing.T) {
 	t.Log("Fake Random\n", tbl.String())
 }
 
+func TestPhone(t *testing.T) {
+	phone := faker.Phone{}
+	tbl := NewTable()
+	tbl.SetHeader("Field Name", "Data")
+	tbl.AddData("Phone number", phone.Number_())
+	tbl.AddData("Phone format", phone.Format_())
+
+	tbl.Render()
+
+	// logging
+	t.Log("Fake Phone\n", tbl.String())
+}
+
 func checkError(t *testing.T, err error) {
 	t.Error(err)
 }
