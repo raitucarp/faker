@@ -91,10 +91,10 @@ func (image *Image) ImageURL(category string, params ...interface{}) string {
 	return image.Url
 }
 
-// TODO: Avatar from internet avatar
 func (image *Image) Avatar_(params ...interface{}) string {
-	//imageUrl(width, height, 'abstract', randomize);
-	return ""
+
+	internet := Internet{}
+	return internet.Avatar_()
 }
 
 func (image *Image) Abstract_(params ...interface{}) string {
