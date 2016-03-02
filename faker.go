@@ -22,6 +22,7 @@ type Faker struct {
 	Hacker   Hacker
 	Image    Image
 	Internet Internet
+	Lorem    Lorem
 
 	// temp data handling
 	data interface{}
