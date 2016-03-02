@@ -7,8 +7,9 @@ import (
 	"github.com/raitucarp/faker/locales/en/date"
 	"github.com/raitucarp/faker/locales/en/finance"
 	"github.com/raitucarp/faker/locales/en/hacker"
-	"github.com/raitucarp/faker/locales/en/name"
 	"github.com/raitucarp/faker/locales/en/internet"
+	"github.com/raitucarp/faker/locales/en/lorem"
+	"github.com/raitucarp/faker/locales/en/name"
 )
 
 type Definitions struct {
@@ -20,6 +21,7 @@ type Definitions struct {
 	Hacker   hacker.Definitions
 	Name     name.Definitions
 	Internet internet.Definitions
+	Lorem    lorem.Definitions
 }
 
 func Export() Definitions {
@@ -32,6 +34,7 @@ func Export() Definitions {
 		Finance:  finance.Export(),
 		Hacker:   hacker.Export(),
 		Internet: internet.Export(),
+		Lorem:    lorem.Export(),
 	}
 
 	return d
