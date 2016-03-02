@@ -231,6 +231,25 @@ func TestInternet(t *testing.T) {
 	t.Log("Fake Internet\n", tbl.String())
 }
 
+func TestLorem(t *testing.T) {
+	lorem := faker.Lorem{}
+
+	tbl := NewTable()
+
+	tbl.SetHeader("Field Name", "Data")
+	tbl.AddData("Word", lorem.Word_())
+	tbl.AddData("Words", strings.Join(lorem.Words_(), ", "))
+	tbl.AddData("Sentence", lorem.Sentence_())
+	tbl.AddData("Sentences", lorem.Sentences_())
+	tbl.AddData("Paragraph", lorem.Paragraph_())
+	tbl.AddData("Paragraphs", lorem.Paragraphs_())
+	tbl.AddData("Text", lorem.Text())
+	tbl.Render()
+
+	// logging
+	t.Log("Fake Lorem\n", tbl.String())
+}
+
 func TestName(t *testing.T) {
 	f := faker.New()
 
