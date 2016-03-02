@@ -1,19 +1,19 @@
 package faker
 
 import (
-	"reflect"
-	"math/rand"
-	"strings"
-	"strconv"
-	"regexp"
 	"math"
+	"math/rand"
+	"reflect"
+	"regexp"
+	"strconv"
+	"strings"
 	"time"
 )
 
 type InternetDomain struct {
-	Name string
+	Name   string
 	Suffix string
-	Word string
+	Word   string
 }
 
 func (id *InternetDomain) Name_(params ...interface{}) string {
@@ -164,7 +164,6 @@ func (i *Internet) DomainName_() string {
 	return i.Domain.Name
 }
 
-
 func (i *Internet) DomainSuffix_() string {
 	i.Domain.Suffix_()
 	return i.Domain.Suffix
@@ -186,17 +185,9 @@ func (i *Internet) IP_() string {
 	return i.IP
 }
 
-/*
-userAgent
-color
-mac
-password*/
-
-
 func (i *Internet) UserAgent_() string {
 	return ""
 }
-
 
 func (i *Internet) Color_(params ...interface{}) string {
 	base := map[string]int{}
@@ -219,9 +210,9 @@ func (i *Internet) Color_(params ...interface{}) string {
 		base["blue"] = params[2].(int)
 	}
 
-	red := math.Floor(float64(rand.Intn(256) + base["red"]) / 2)
-	green := math.Floor(float64(rand.Intn(256) + base["green"]) / 2)
-	blue := math.Floor(float64(rand.Intn(256) + base["blue"]) / 2)
+	red := math.Floor(float64(rand.Intn(256)+base["red"]) / 2)
+	green := math.Floor(float64(rand.Intn(256)+base["green"]) / 2)
+	blue := math.Floor(float64(rand.Intn(256)+base["blue"]) / 2)
 
 	redHex := strconv.FormatInt(int64(red), 16)
 	greenHex := strconv.FormatInt(int64(green), 16)
@@ -231,12 +222,11 @@ func (i *Internet) Color_(params ...interface{}) string {
 	return i.Color
 }
 
-
 func (i *Internet) Mac_() string {
 	var mac string
 	for i := 0; i < 12; i++ {
 		mac += strconv.FormatInt(int64(rand.Intn(17)), 16)
-		if i % 2 == 1 && i != 11 {
+		if i%2 == 1 && i != 11 {
 			mac += ":"
 		}
 	}
