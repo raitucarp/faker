@@ -7,6 +7,7 @@ import (
 	"strings"
 	"testing"
 	//"time"
+	"strconv"
 )
 
 type Table struct {
@@ -278,6 +279,19 @@ func TestName(t *testing.T) {
 
 	// logging
 	t.Log("Fake Name\n", tbl.String())
+}
+
+func TestRandom(t *testing.T) {
+
+	tbl := NewTable()
+	tbl.SetHeader("Field Name", "Data")
+	tbl.AddData("UUID", faker.UUID())
+	tbl.AddData("Boolean", strconv.FormatBool(faker.Boolean()))
+
+	tbl.Render()
+
+	// logging
+	t.Log("Fake Random\n", tbl.String())
 }
 
 func checkError(t *testing.T, err error) {
