@@ -7,11 +7,13 @@ type Gender int
 const (
 	Male Gender = iota
 	Female
-	RandomGender
 )
 
 var gender Gender
+var data interface{}
 
+
+// Faker is complete structure for all type.
 type Faker struct {
 	Name     Name
 	Address  Address
@@ -28,9 +30,12 @@ type Faker struct {
 	data interface{}
 }
 
-type Definitions map[string]interface{}
+// Fake Generate random data, fake it all.
+func (f *Faker) Fake() {
+	f.Name.Fake()
+	f.Address.Fake()
 
-var data interface{}
+}
 
 func (f *Faker) generate() {
 	err := SetLocale(locales.EN)
@@ -39,13 +44,10 @@ func (f *Faker) generate() {
 	}
 }
 
+
+// New Create new Faker
 func New() (f Faker) {
 	f.generate()
 
 	return
 }
-
-/*
-func SetGender(g Gender) {
-	gender = g
-}*/
