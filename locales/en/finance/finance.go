@@ -9,8 +9,14 @@ type Definitions struct {
 }
 
 func (def Definitions) RandomCurrency() map[string]string {
-	rnd := rand.Intn(len(Currency))
-	c := Currency[rnd]
+	currencies := []currency{}
+	for _, v := range Currency{
+		if v.Symbol != "" {
+			currencies = append(currencies, v)
+		}
+	}
+	rnd := rand.Intn(len(currencies))
+	c := currencies[rnd]
 	result := map[string]string{
 		"Symbol": c.Symbol,
 		"Name":   c.Name,
