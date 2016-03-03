@@ -24,7 +24,7 @@ func (l *Lorem) Word_() string {
 func (l *Lorem) Words_(params ...interface{}) []string {
 	length := 3
 
-	types := typeof(params...)
+	types := kindOf(params...)
 
 	if len(types) >= 1 && types[0] == reflect.Int {
 		length = params[0].(int)
@@ -44,7 +44,7 @@ func (l *Lorem) Words_(params ...interface{}) []string {
 func (l *Lorem) Sentence_(params ...interface{}) string {
 	wordCount := random(3, 10)
 
-	types := typeof(params...)
+	types := kindOf(params...)
 	if len(types) >= 1 && types[0] == reflect.Int {
 		wordCount = params[0].(int)
 	}
@@ -66,7 +66,7 @@ func (l *Lorem) Sentences_(params ...interface{}) string {
 
 	sentences := []string{}
 
-	types := typeof(params...)
+	types := kindOf(params...)
 	if len(types) >= 1 && types[0] == reflect.Int {
 		sentenceCount = params[0].(int)
 	}
@@ -88,7 +88,7 @@ func (l *Lorem) Sentences_(params ...interface{}) string {
 func (l *Lorem) Paragraph_(params ...interface{}) string {
 	sentenceCount := 3
 
-	types := typeof(params...)
+	types := kindOf(params...)
 	if len(types) >= 1 && types[0] == reflect.Int {
 		sentenceCount = params[0].(int)
 	}
@@ -104,7 +104,7 @@ func (l *Lorem) Paragraphs_(params ...interface{}) string {
 	separator := "\n\r"
 	paragraphCount := 3
 
-	types := typeof(params...)
+	types := kindOf(params...)
 	if len(types) >= 1 && types[0] == reflect.String {
 		separator = params[0].(string)
 	}

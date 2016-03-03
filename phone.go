@@ -28,12 +28,12 @@ type Phone struct {
 func (phone *Phone) Number_(params ...interface{}) string {
 	format := phone.Format_()
 
-	types := typeof(params...)
+	types := kindOf(params...)
 	if len(types) >= 1 && types[0] == reflect.String {
 		format = params[0].(string)
 	}
 
-	phone.Number = replaceSymbolsWithNumber(format, '#')
+	phone.Number = replaceSymbolWithNumber(format, '#')
 
 	return phone.Number
 }

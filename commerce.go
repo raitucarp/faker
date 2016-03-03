@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"strconv"
 	"strings"
+	"reflect"
 )
 
 type ProductName struct {
@@ -37,14 +38,36 @@ func (c *Commerce) Department_() string {
 	return c.Department
 }
 
-func (c *Commerce) Price_(max int, dec float64, symbol string) string {
-	if dec < 2 {
-		dec = 2
+func (c *Commerce) Price_(params ...interface{}) string {
+	// max int, dec float64, symbol string
+	min := 0
+	max := 1000
+	dec := float64(2)
+	var symbol string
+
+	kinds := kindOf(params...)
+	if len(kinds) >= 1 && kinds[0] == reflect.Int {
+		min = params[0].(int)
 	}
 
-	if max < 0 {
-		return symbol + "0.00"
+	if len(kinds) >= 2 && kinds[1] == reflect.Int {
+		max = params[1].(int)
 	}
+
+	if len(kinds) >= 3 && kinds[2] == reflect.Float64 {
+		dec = params[2].(float64)
+	}
+
+	if len(kinds) >= 4 && kinds[3] == reflect.String {
+		symbol = params[3].(string)
+	}
+
+
+
+	if min < 0 || max < 0 {
+		return symbol + "0.00";
+	}
+
 
 	rnd := float64(rand.Intn(max))
 	pow := math.Pow(10, dec)

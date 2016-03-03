@@ -13,7 +13,7 @@ type FinanceAccount struct {
 }
 
 func (fa *FinanceAccount) Number_(args ...interface{}) string {
-	types := typeof(args)
+	types := kindOf(args)
 
 	// default length
 	length := 8
@@ -31,7 +31,7 @@ func (fa *FinanceAccount) Number_(args ...interface{}) string {
 	}
 
 	template := strings.Repeat("#", length)
-	n := replaceSymbolsWithNumber(template, '#')
+	n := replaceSymbolWithNumber(template, '#')
 
 	fa.Number = n
 	return fa.Number
@@ -87,7 +87,7 @@ type Finance struct {
 }
 
 func (f *Finance) Account_(args ...interface{}) string {
-	f.Account.Number_(args)
+	f.Account.Number_(args...)
 	return f.Account.Number
 }
 
@@ -101,7 +101,7 @@ func (f *Finance) Mask_(params ...interface{}) string {
 	parenthesis := true
 	ellipsis := true
 
-	types := typeof(params...)
+	types := kindOf(params...)
 	if len(types) >= 1 && types[0] == reflect.Int {
 		length = params[0].(int)
 	}
@@ -125,7 +125,7 @@ func (f *Finance) Mask_(params ...interface{}) string {
 		template = strings.Join([]string{"(", template, ")"}, "")
 	}
 
-	return replaceSymbolsWithNumber(template, '#')
+	return replaceSymbolWithNumber(template, '#')
 }
 
 func (f *Finance) Amount_(params ...interface{}) string {
@@ -134,7 +134,7 @@ func (f *Finance) Amount_(params ...interface{}) string {
 	dec := float64(2)
 	symbol := ""
 
-	types := typeof(params)
+	types := kindOf(params)
 
 	if len(types) >= 1 && types[0] == reflect.Int {
 		min = params[0].(int)

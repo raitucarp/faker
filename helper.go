@@ -11,7 +11,7 @@ import (
 	"text/template"
 )
 
-func Fake(s string) (result string, err error) {
+func Parse(s string) (result string, err error) {
 	s = strings.Replace(s, "#{", "#{sample ", -1)
 	t := template.New("fake")
 	t = t.Funcs(template.FuncMap{
@@ -24,6 +24,9 @@ func Fake(s string) (result string, err error) {
 	}
 
 	var b bytes.Buffer
+	//f := New()
+	//f.Fake()
+
 
 	err = t.Execute(&b, data)
 	if err != nil {
@@ -145,16 +148,24 @@ func sample(list []string) string {
 	return list[r]
 }
 
-func typeof(p ...interface{}) (types []reflect.Kind) {
+func kindOf(p ...interface{}) (kinds []reflect.Kind) {
 
 	for i := 0; i < len(p); i++ {
 		t := reflect.TypeOf(p[i]).Kind()
+		kinds = append(kinds, t)
+	}
+	return
+}
+
+func typeOf(p ...interface{}) (types []reflect.Type) {
+	for i := 0; i < len(p); i++ {
+		t := reflect.ValueOf(p[i]).Type()
 		types = append(types, t)
 	}
 	return
 }
 
-func replaceSymbolsWithNumber(s string, symbol rune) (result string) {
+func replaceSymbolWithNumber(s string, symbol rune) (result string) {
 	for _, v := range s {
 		if v == symbol {
 			r := rand.Intn(9)

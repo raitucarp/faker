@@ -1,7 +1,6 @@
 package faker
 
 import (
-	"fmt"
 	"math"
 	"reflect"
 	"strconv"
@@ -40,7 +39,7 @@ func (d *Date) validateRef(t reflect.Kind, r interface{}) time.Time {
 }
 
 func (d *Date) validate(params ...interface{}) (years int, ref time.Time) {
-	types := typeof(params...)
+	types := kindOf(params...)
 
 	years = 1
 	ref = time.Now()
@@ -89,10 +88,16 @@ func (d *Date) Future_(params ...interface{}) time.Time {
 	return future
 }
 
-func (d *Date) Between_(from, to, layout string) time.Time {
+func (d *Date) Between_(from, to string, params ...interface{}) time.Time {
+	layout := "02-02-2006"
+
+	kinds := kindOf(params...)
+	if len(kinds) >= 1 && kinds[0] == reflect.String {
+		layout = params[0].(string)
+	}
+
 	fromTime, err := time.Parse(layout, from)
 	if err != nil {
-		fmt.Println("error go", err)
 		fromTime = time.Unix(time.Now().Unix()-30, 0)
 	}
 
@@ -107,8 +112,15 @@ func (d *Date) Between_(from, to, layout string) time.Time {
 	return time.Unix(newDate, 0)
 }
 
-func (d *Date) Recent_(days int) time.Time {
+func (d *Date) Recent_(params ...interface{}) time.Time {
+	days := 1
 	date := time.Now()
+	kinds := kindOf(params...)
+
+	if len(kinds) >= 1 && kinds[0] == reflect.Int {
+		days = params[0].(int)
+	}
+
 
 	min := int(math.Pow(10, 9))
 	if days <= 1 {
@@ -116,8 +128,6 @@ func (d *Date) Recent_(days int) time.Time {
 	}
 	max := days * 24 * 3600 * min
 	rnd := random(min, max)
-
-	fmt.Println(date.UnixNano(), rnd, date.UnixNano()-int64(rnd))
 
 	future := date.UnixNano() - int64(rnd)
 
@@ -128,7 +138,7 @@ func (d *Date) typCtx(options ...interface{}) string {
 	typ := "Wide"
 	context := false
 
-	types := typeof(options...)
+	types := kindOf(options...)
 
 	if len(types) >= 1 {
 		if types[0] == reflect.String {

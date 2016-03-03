@@ -43,7 +43,7 @@ func (h *Hacker) Phrase_() string {
 	phrase := getData("Hacker", "Phrase")
 	template := sample(phrase)
 
-	result, err := Fake(template)
+	result, err := Parse(template)
 	if err != nil {
 		result = ""
 	}

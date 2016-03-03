@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"strings"
+	"reflect"
+"math/rand"
 )
 
 // Job
@@ -33,31 +35,138 @@ func (n *Name) Fake() {
 	n.JobTitle_()
 }
 
-// FirstName_ Generate first name.
-func (n *Name) FirstName_() string {
-	// get first name list
-	list := getData("Name", "FirstName")
+func genderData(gender Gender, base string, dataName string) []string {
+	var list []string
 
+	if gender == Male {
+		dataName = "Male" + dataName
+	}
+
+	if gender == Female {
+		dataName = "Female" + dataName
+	}
+
+	list = getData(base, dataName)
+	return list
+
+}
+
+
+func (n *Name) withGender(params ...interface{}) bool {
+	gender := Male
+	//kinds := kindOf(params...)
+	types := typeOf(params...)
+
+	// check type
+	if len(types) >= 1 && types[0] == reflect.TypeOf(gender) {
+		return true
+	}
+	return false
+}
+
+func getGender(g interface{}) Gender {
+	t := typeOf(g)
+
+	var gender Gender
+	if t[0] == reflect.TypeOf(Male) {
+		gender = g.(Gender)
+	} else {
+		gender = randomGender()
+	}
+	return gender
+}
+
+func randomGender() Gender {
+	gender := []Gender{Male, Female}
+	rnd := rand.Intn(len(gender))
+	return gender[rnd]
+}
+
+// FirstName_ Generate first name.
+func (name *Name) FirstName_(params ...interface{}) string {
+	gender := Male
+
+	var firstNames []string
+	if name.withGender(params...) {
+		gender = getGender(params[0])
+		firstNames = genderData(gender, "Name", "FirstName")
+	} else {
+		// get first name list
+		firstNames = getData("Name", "FirstName")
+	}
 	// assign to firstName
-	n.FirstName = sample(list)
-	return n.FirstName
+	name.FirstName = sample(firstNames)
+	return name.FirstName
 }
 
 // LastName_ Generate last name.
-func (name *Name) LastName_() string {
-	// get last name list
-	list := getData("Name", "LastName")
+func (name *Name) LastName_(params ...interface{}) string {
+	gender := Male
 
+	var lastNames []string
+	if name.withGender(params...) {
+		gender = getGender(params[0])
+		lastNames = genderData(gender, "Name", "LastName")
+	} else {
+		// get first name list
+		lastNames = getData("Name", "LastName")
+	}
+
+	// get last name list
 	// assign to
-	name.LastName = sample(list)
+	name.LastName = sample(lastNames)
 	return name.LastName
 }
 
 // FindName_ Generate first name and last name.
-func (name *Name) FindName_() string {
-	firstName := name.FirstName_()
-	lastName := name.LastName_()
-	return firstName + " " + lastName
+func (name *Name) FindName_(params ...interface{}) string {
+	var gender interface{}
+	var firstName, lastName, prefix, suffix string
+	r := rand.Intn(8);
+
+
+	/*prefix := name.Prefix_()
+	suffix := name.Suffix_()*/
+
+	kinds := kindOf(params...)
+
+
+	// gender
+	if len(kinds) >= 3 {
+		types := typeOf(params[2])
+		if types[0] == reflect.TypeOf(Male) {
+			gender = getGender(gender)
+			firstName = name.FirstName_(gender)
+			lastName = name.LastName_(gender)
+		}
+	}
+
+	// set first name if defined in params
+	if len(kinds) >= 1 && kinds[0] == reflect.String {
+		firstName = params[0].(string)
+	}
+	// set last name if defined in params
+	if len(kinds) >= 2 && kinds[1] == reflect.String {
+		lastName = params[1].(string)
+	}
+
+	finalName := []string{firstName, lastName}
+
+	if r == 0 {
+		prefix = name.Prefix_(gender)
+		if prefix != "" {
+			finalName = []string{prefix, firstName, lastName}
+			return strings.Join(finalName, " ")
+		}
+	}
+
+	if r == 1 {
+		suffix = name.Suffix_()
+		finalName = []string{firstName, lastName, suffix}
+		return strings.Join(finalName, " ")
+	}
+
+	return strings.Join(finalName, " ")
 }
 
 // Suffix_ Generate suffix name.
@@ -69,10 +178,17 @@ func (name *Name) Suffix_() string {
 }
 
 // Prefix_ Generate prefix name.
-func (name *Name) Prefix_() string {
-	// get last name list
-	list := getData("Name", "Prefix")
-	name.Prefix = sample(list)
+func (name *Name) Prefix_(params ...interface{}) string {
+	var prefix []string
+	if name.withGender(params...) {
+		gender = getGender(params[0])
+		prefix = genderData(gender, "Name", "Prefix")
+	} else {
+		// get first name list
+		prefix = getData("Name", "LastName")
+	}
+
+	name.Prefix = sample(prefix)
 	return name.Prefix
 }
 

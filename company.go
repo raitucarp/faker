@@ -1,5 +1,7 @@
 package faker
 
+import "reflect"
+
 type CatchPhrase struct {
 	Adjective  string
 	Descriptor string
@@ -24,11 +26,16 @@ func (comp *Company) Suffixes_() []string {
 	return suffixes
 }
 
-func (comp *Company) CompanyName_() string {
+func (comp *Company) CompanyName_(params ...interface{}) string {
 	formats := getData("Company", "Name")
 	format := sample(formats)
 
-	name, err := Fake(format)
+	kinds := kindOf(params...)
+	if len(kinds) >= 1 && kinds[0] == reflect.String {
+		format = params[0].(string)
+	}
+
+	name, err := Parse(format)
 	if err != nil {
 		panic(err)
 	}
@@ -45,7 +52,7 @@ func (comp *Company) CompanySuffix_() string {
 func (comp *Company) CatchPhrase_() string {
 	template := getData("Company", "CatchPhrase", "Template")
 	catchPhrase := sample(template)
-	result, err := Fake(catchPhrase)
+	result, err := Parse(catchPhrase)
 	if err != nil {
 		panic(err)
 	}
@@ -56,7 +63,7 @@ func (comp *Company) CatchPhrase_() string {
 func (comp *Company) BS_() string {
 	template := getData("Company", "BusinessSlogan", "Template")
 	bs := sample(template)
-	result, err := Fake(bs)
+	result, err := Parse(bs)
 	if err != nil {
 		panic(err)
 	}

@@ -29,7 +29,7 @@ func (id *InternetDomain) Suffix_(params ...interface{}) string {
 	tld := getData("Internet", "DomainSuffix", "Generic")
 	name := sample(tld)
 
-	types := typeof(params...)
+	types := kindOf(params...)
 
 	// check if all tld or not
 	if len(types) >= 1 && types[0] == reflect.Bool {
@@ -73,7 +73,7 @@ func (i *Internet) Email_(params ...interface{}) string {
 	firstName := name.FirstName_()
 	lastName := name.LastName_()
 
-	types := typeof(params...)
+	types := kindOf(params...)
 
 	if len(types) >= 1 && types[0] == reflect.String {
 		firstName = params[0].(string)
@@ -106,7 +106,7 @@ func (i *Internet) Username_(params ...interface{}) string {
 	firstName := name.FirstName_()
 	lastName := name.LastName_()
 
-	types := typeof(params...)
+	types := kindOf(params...)
 	if len(types) >= 1 && types[0] == reflect.String {
 		firstName = params[0].(string)
 	}
@@ -197,7 +197,7 @@ func (i *Internet) Color_(params ...interface{}) string {
 
 	rand.Seed(time.Now().Unix() + rand.Int63())
 
-	types := typeof(params...)
+	types := kindOf(params...)
 	if len(types) >= 1 && types[0] == reflect.Int {
 		base["red"] = params[0].(int)
 	}

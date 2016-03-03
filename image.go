@@ -59,12 +59,11 @@ func (image *Image) ImageURL(category string, params ...interface{}) string {
 	randomize := false
 	image.Width = 640
 	image.Height = 480
-	image.Category = category
+	image.Category = ""
 
-	types := typeof(params...)
+	types := kindOf(params...)
 
 	if len(types) >= 1 && types[0] == reflect.Int {
-
 		image.Width = params[0].(int)
 	}
 

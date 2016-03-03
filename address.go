@@ -5,6 +5,8 @@ import (
 	"encoding/xml"
 	"math/rand"
 	"strconv"
+	"reflect"
+	"strings"
 )
 
 type City struct {
@@ -39,11 +41,17 @@ func (addr *Address) Fake() {
 	addr.ZipCode_()
 }
 
-func (addr *Address) ZipCode_() string {
+func (addr *Address) ZipCode_(params ...interface{}) string {
+	var format string
+
+	kinds := kindOf(params...)
+	if len(kinds) >= 1 && kinds[0] == reflect.String {
+		format = params[0].(string)
+	}
+
 	// get last name list
 	list := getData("Address", "PostCode")
 
-	var format string
 	if len(list) > 1 {
 		format = sample(list)
 	} else {
@@ -54,22 +62,31 @@ func (addr *Address) ZipCode_() string {
 	return addr.ZipCode
 }
 
+func (addr *Address) City_(params ...interface{}) string {
+	var format string
+	// get last name list
+	list := getData("Address", "City")
+
+
+	kinds := kindOf(params...)
+	if len(kinds) >= 1 && kinds[0] == reflect.String {
+		format = params[0].(string)
+	} else {
+		format = sample(list)
+	}
+
+	result, err := Parse(format)
+	if err != nil {
+		panic(err)
+	}
+	return result
+}
+
 func (addr *Address) CityPrefix_() string {
 	// get last name list
 	list := getData("Address", "CityPrefix")
 	addr.City.Prefix = sample(list)
 	return addr.City.Prefix
-}
-
-func (addr *Address) City_() string {
-	// get last name list
-	list := getData("Address", "City")
-	city := sample(list)
-	result, err := Fake(city)
-	if err != nil {
-		panic(err)
-	}
-	return result
 }
 
 func (addr *Address) CitySuffix_() string {
@@ -99,11 +116,27 @@ func (addr *Address) StreetName_() string {
 
 func (addr *Address) BuildingNumber_() string {
 	format := getData("Address", "BuildingNumber")
-	return replaceSymbolsWithNumber(sample(format), '#')
+	return replaceSymbolWithNumber(sample(format), '#')
 }
 
-func (addr *Address) StreetAddress_() string {
-	addr.Street.Address = addr.BuildingNumber_() + " " + addr.StreetName_()
+func (addr *Address) StreetAddress_(params ...interface{}) string {
+	var address string
+	useFullAddress := false
+
+	kinds := kindOf(params...)
+	if len(kinds) >= 1 && kinds[0] == reflect.Bool {
+		useFullAddress = params[0].(bool)
+	}
+
+	r := rand.Intn(3)
+	symbol := strings.Repeat("#", 5 - r)
+	address = symbol + " " + addr.StreetName_()
+
+	if useFullAddress {
+		address = address + " " + addr.SecondaryAddress_()
+	}
+
+	addr.Street.Address = address
 	return addr.Street.Address
 }
 
@@ -122,7 +155,7 @@ func (addr *Address) StreetSuffix_() string {
 func (addr *Address) SecondaryAddress_() string {
 	formats := getData("Address", "SecondaryAddress")
 	secondaryAddress := sample(formats)
-	addr.Secondary = replaceSymbolsWithNumber(secondaryAddress, '#')
+	addr.Secondary = replaceSymbolWithNumber(secondaryAddress, '#')
 	return addr.Secondary
 }
 
