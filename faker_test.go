@@ -132,7 +132,7 @@ func TestDate(t *testing.T) {
 	tbl.SetHeader("Field Name", "Data")
 	tbl.AddData("Past", d.Past_().String())
 	tbl.AddData("Future", d.Future_().String())
-	tbl.AddData("Between", d.Between_("02/21/2016", "02/22/2016", "01/02/2006").String())
+	tbl.AddData("Between", d.Between_("02/21/2016", "02/22/2016", "01/2/20006").String())
 	tbl.AddData("Recent", d.Recent_(1).String())
 	tbl.AddData("Month", d.Month_())
 	tbl.AddData("Weekday", d.Weekday_())
