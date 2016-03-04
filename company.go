@@ -106,3 +106,28 @@ func (comp *Company) BsNoun_() string {
 	comp.BusinessSlogan.Noun = sample(noun)
 	return comp.BusinessSlogan.Noun
 }
+
+// Fake Generate random data for all field
+func (company *Company) Fake() {
+	company.Suffixes_()
+	company.CompanyName_()
+	company.CompanySuffix_()
+	company.CatchPhrase_()
+	company.BS_()
+	company.CatchPhraseAdjective_()
+	company.CatchPhraseDescriptor_()
+	company.CatchPhraseNoun_()
+	company.BsAdjective_()
+	company.BsBuzz_()
+	company.BsNoun_()
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (company *Company) ToJSON() (string, error) {
+	return ToJSON(company)
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (company *Company) ToXML() (string, error) {
+	return ToJSON(company)
+}

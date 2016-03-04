@@ -2,6 +2,8 @@ package faker
 
 import (
 	"bytes"
+	"encoding/json"
+	"encoding/xml"
 	"github.com/raitucarp/faker/locales"
 	"math/rand"
 	"reflect"
@@ -26,7 +28,6 @@ func Parse(s string) (result string, err error) {
 	var b bytes.Buffer
 	//f := New()
 	//f.Fake()
-
 
 	err = t.Execute(&b, data)
 	if err != nil {
@@ -201,4 +202,22 @@ func Slugify(s string) string {
 	result := r2.ReplaceAllString(newString, "")
 
 	return result
+}
+
+func ToJSON(data interface{}) (s string, err error) {
+	// set first name if defined in params
+	result, err := json.Marshal(data)
+	if err != nil {
+		return
+	}
+	return string(result), err
+}
+
+func ToXML(data interface{}) (s string, err error) {
+	result, err := xml.Marshal(data)
+
+	if err != nil {
+		return
+	}
+	return string(result), err
 }

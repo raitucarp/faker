@@ -7,24 +7,6 @@ type Phone struct {
 	Format string
 }
 
-/*
- self.phoneNumber = function (format) {
-      format = format || faker.phone.phoneFormats();
-      return faker.helpers.replaceSymbolWithNumber(format);
-  };
-
-  // FIXME: this is strange passing in an array index.
-  self.phoneNumberFormat = function (phoneFormatsArrayIndex) {
-      phoneFormatsArrayIndex = phoneFormatsArrayIndex || 0;
-      return faker.helpers.replaceSymbolWithNumber(faker.definitions.phone_number.formats[phoneFormatsArrayIndex]);
-  };
-
-  self.phoneFormats = function () {
-    return faker.random.arrayElement(faker.definitions.phone_number.formats);
-  };
-
-*/
-
 func (phone *Phone) Number_(params ...interface{}) string {
 	format := phone.Format_()
 
@@ -34,7 +16,7 @@ func (phone *Phone) Number_(params ...interface{}) string {
 	}
 
 	phone.Number = replaceSymbolWithNumber(format, '#')
-
+	phone.Format = format
 	return phone.Number
 }
 
@@ -42,4 +24,20 @@ func (phone *Phone) Format_() string {
 	format := getData("Phone", "PhoneFormat")
 	phone.Format = sample(format)
 	return phone.Format
+}
+
+// Fake Generate random data for all field
+func (p *Phone) Fake() {
+	p.Format_()
+	p.Number_()
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (p *Phone) ToJSON() (string, error) {
+	return ToJSON(p)
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (p *Phone) ToXML() (string, error) {
+	return ToJSON(p)
 }

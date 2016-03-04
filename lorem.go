@@ -120,22 +120,43 @@ func (l *Lorem) Paragraphs_(params ...interface{}) string {
 	return l.Paragraphs
 }
 
-func (l *Lorem) Text(params ...interface{}) string {
+func (l *Lorem) Text(params ...interface{}) (val string) {
 	//method := []string{"word", "words", "sentence", "sentences", "paragraph", "paragraphs"}
-	immutable := reflect.ValueOf(l)
-	numMethod := immutable.NumMethod()
-	rnd := rand.Intn(numMethod)
-	method := immutable.Method(rnd)
-	ret := method.Call([]reflect.Value{})
-	kind := ret[0].Kind()
-	result := ret[0].Interface()
-
-	var val string
-	if kind == reflect.Slice {
-		val = strings.Join(result.([]string), ", ")
-	} else {
-		val = result.(string)
+	rnd := rand.Intn(6)
+	switch rnd {
+	case 0:
+		l.Word_()
+	case 1:
+		l.Words_()
+	case 2:
+		l.Sentence_()
+	case 3:
+		l.Sentences_()
+	case 4:
+		l.Paragraph_()
+	case 5:
+		l.Paragraphs_()
 	}
 
-	return val
+	return
+}
+
+// Fake Generate random data for all field
+func (l *Lorem) Fake() {
+	l.Word_()
+	l.Words_()
+	l.Sentence_()
+	l.Sentences_()
+	l.Paragraph_()
+	l.Paragraphs_()
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (l *Lorem) ToJSON() (string, error) {
+	return ToJSON(l)
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (l *Lorem) ToXML() (string, error) {
+	return ToJSON(l)
 }

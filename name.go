@@ -1,11 +1,9 @@
 package faker
 
 import (
-	"encoding/json"
-	"encoding/xml"
-	"strings"
+	"math/rand"
 	"reflect"
-"math/rand"
+	"strings"
 )
 
 // Job
@@ -25,16 +23,6 @@ type Name struct {
 	Job       Job    `json:"job"`
 }
 
-func (n *Name) Fake() {
-	n.FirstName_()
-	n.LastName_()
-	n.Suffix_()
-	n.Prefix_()
-	n.Title_()
-	// fake job descriptor, area, type.
-	n.JobTitle_()
-}
-
 func genderData(gender Gender, base string, dataName string) []string {
 	var list []string
 
@@ -51,14 +39,11 @@ func genderData(gender Gender, base string, dataName string) []string {
 
 }
 
-
 func (n *Name) withGender(params ...interface{}) bool {
-	gender := Male
-	//kinds := kindOf(params...)
 	types := typeOf(params...)
 
 	// check type
-	if len(types) >= 1 && types[0] == reflect.TypeOf(gender) {
+	if len(types) >= 1 && types[0] == reflect.TypeOf(Male) {
 		return true
 	}
 	return false
@@ -121,20 +106,20 @@ func (name *Name) LastName_(params ...interface{}) string {
 // FindName_ Generate first name and last name.
 func (name *Name) FindName_(params ...interface{}) string {
 	var gender interface{}
-	var firstName, lastName, prefix, suffix string
-	r := rand.Intn(8);
-
+	firstName := name.FirstName_()
+	lastName := name.LastName_()
+	var prefix, suffix string
+	r := rand.Intn(8)
 
 	/*prefix := name.Prefix_()
 	suffix := name.Suffix_()*/
 
 	kinds := kindOf(params...)
-
+	types := typeOf(params...)
 
 	// gender
 	if len(kinds) >= 3 {
-		types := typeOf(params[2])
-		if types[0] == reflect.TypeOf(Male) {
+		if types[2] == reflect.TypeOf(Male) {
 			gender = getGender(gender)
 			firstName = name.FirstName_(gender)
 			lastName = name.LastName_(gender)
@@ -152,7 +137,7 @@ func (name *Name) FindName_(params ...interface{}) string {
 
 	finalName := []string{firstName, lastName}
 
-	if r == 0 {
+	if r == 0 && len(params) >= 3 {
 		prefix = name.Prefix_(gender)
 		if prefix != "" {
 			finalName = []string{prefix, firstName, lastName}
@@ -239,22 +224,26 @@ func (name *Name) JobType_() string {
 	return name.Job.Type
 }
 
-// ToJSON Encode name and its fields to JSON.
-func (n *Name) ToJSON() (s string, err error) {
-	result, err := json.Marshal(n)
-
-	if err != nil {
-		return
-	}
-	return string(result), err
+// Fake Generate random data for all field
+func (this *Name) Fake() {
+	this.FirstName_()
+	this.LastName_()
+	this.FindName_()
+	this.Suffix_()
+	this.Prefix_()
+	this.Title_()
+	this.JobTitle_()
+	this.JobDescriptor_()
+	this.JobArea_()
+	this.JobType_()
 }
 
 // ToJSON Encode name and its fields to JSON.
-func (n *Name) ToXML() (s string, err error) {
-	result, err := xml.Marshal(n)
+func (n *Name) ToJSON() (string, error) {
+	return ToJSON(n)
+}
 
-	if err != nil {
-		return
-	}
-	return string(result), err
+// ToJSON Encode name and its fields to JSON.
+func (n *Name) ToXML() (string, error) {
+	return ToJSON(n)
 }

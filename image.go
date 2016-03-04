@@ -55,7 +55,7 @@ func (image *Image) Image_(params ...interface{}) string {
 	return image.Url
 }
 
-func (image *Image) ImageURL(category string, params ...interface{}) string {
+func (image *Image) imageURL(category string, params ...interface{}) string {
 	randomize := false
 	image.Width = 640
 	image.Height = 480
@@ -97,59 +97,74 @@ func (image *Image) Avatar_(params ...interface{}) string {
 }
 
 func (image *Image) Abstract_(params ...interface{}) string {
-	image.ImageURL("abstract", params...)
+	image.imageURL("abstract", params...)
 	return image.Url
 }
 
 func (image *Image) Animals_(params ...interface{}) string {
-	image.ImageURL("animals", params...)
+	image.imageURL("animals", params...)
 	return image.Url
 }
 
 func (image *Image) Business_(params ...interface{}) string {
-	image.ImageURL("business", params...)
+	image.imageURL("business", params...)
 	return image.Url
 }
 
 func (image *Image) Cats_(params ...interface{}) string {
-	image.ImageURL("cats", params...)
+	image.imageURL("cats", params...)
 	return image.Url
 }
 
 func (image *Image) City_(params ...interface{}) string {
-	image.ImageURL("city", params...)
+	image.imageURL("city", params...)
 	return image.Url
 }
 
 func (image *Image) Food_(params ...interface{}) string {
-	image.ImageURL("food", params...)
+	image.imageURL("food", params...)
 	return image.Url
 }
 func (image *Image) Nightlife_(params ...interface{}) string {
-	image.ImageURL("nightlife", params...)
+	image.imageURL("nightlife", params...)
 	return image.Url
 }
 func (image *Image) Fashion_(params ...interface{}) string {
-	image.ImageURL("fashion", params...)
+	image.imageURL("fashion", params...)
 	return image.Url
 }
 func (image *Image) People_(params ...interface{}) string {
-	image.ImageURL("people", params...)
+	image.imageURL("people", params...)
 	return image.Url
 }
 func (image *Image) Nature_(params ...interface{}) string {
-	image.ImageURL("nature", params...)
+	image.imageURL("nature", params...)
 	return image.Url
 }
 func (image *Image) Sports_(params ...interface{}) string {
-	image.ImageURL("sports", params...)
+	image.imageURL("sports", params...)
 	return image.Url
 }
 func (image *Image) Technics_(params ...interface{}) string {
-	image.ImageURL("technics", params...)
+	image.imageURL("technics", params...)
 	return image.Url
 }
 func (image *Image) Transport_(params ...interface{}) string {
-	image.ImageURL("transport", params...)
+	image.imageURL("transport", params...)
 	return image.Url
+}
+
+// Fake Generate random data for all field
+func (image *Image) Fake() {
+	image.Image_()
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (image *Image) ToJSON() (string, error) {
+	return ToJSON(image)
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (image *Image) ToXML() (string, error) {
+	return ToJSON(image)
 }

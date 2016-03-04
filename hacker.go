@@ -34,8 +34,8 @@ func (h *Hacker) Verb_() string {
 }
 
 func (h *Hacker) IngVerb_() string {
-	ingverb := getData("Hacker", "IngVerb")
-	h.IngVerb = sample(ingverb)
+	ingVerb := getData("Hacker", "IngVerb")
+	h.IngVerb = sample(ingVerb)
 	return h.IngVerb
 }
 
@@ -50,4 +50,24 @@ func (h *Hacker) Phrase_() string {
 
 	h.Phrase = result
 	return h.Phrase
+}
+
+// Fake Generate random data for all field
+func (h *Hacker) Fake() {
+	h.Abbreviation_()
+	h.Adjective_()
+	h.Noun_()
+	h.Verb_()
+	h.IngVerb_()
+	h.Phrase_()
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (h *Hacker) ToJSON() (string, error) {
+	return ToJSON(h)
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (h *Hacker) ToXML() (string, error) {
+	return ToJSON(h)
 }

@@ -239,3 +239,31 @@ func (i *Internet) Mac_() string {
 func (i *Internet) Password_() string {
 	return ""
 }
+
+// Fake Generate random data for all field
+func (i *Internet) Fake() {
+	i.Avatar_()
+	i.Email_()
+	i.ExampleEmail()
+	i.Username_()
+	i.Protocol_()
+	i.URL_()
+	i.DomainName_()
+	i.DomainSuffix_()
+	i.DomainWord_()
+	i.IP_()
+	i.UserAgent_()
+	i.Color_()
+	i.Mac_()
+	i.Password_()
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (i *Internet) ToJSON() (string, error) {
+	return ToJSON(i)
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (i *Internet) ToXML() (string, error) {
+	return ToJSON(i)
+}

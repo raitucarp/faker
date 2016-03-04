@@ -8,11 +8,11 @@ import (
 )
 
 type FinanceAccount struct {
-	Number string
+	Number int
 	Name   string
 }
 
-func (fa *FinanceAccount) Number_(args ...interface{}) string {
+func (fa *FinanceAccount) Number_(args ...interface{}) int {
 	types := kindOf(args)
 
 	// default length
@@ -32,8 +32,9 @@ func (fa *FinanceAccount) Number_(args ...interface{}) string {
 
 	template := strings.Repeat("#", length)
 	n := replaceSymbolWithNumber(template, '#')
+	num, _ := strconv.Atoi(n)
 
-	fa.Number = n
+	fa.Number = num
 	return fa.Number
 }
 
@@ -86,7 +87,7 @@ type Finance struct {
 	Currency        FinanceCurrency
 }
 
-func (f *Finance) Account_(args ...interface{}) string {
+func (f *Finance) Account_(args ...interface{}) int {
 	f.Account.Number_(args...)
 	return f.Account.Number
 }
@@ -181,4 +182,26 @@ func (f *Finance) CurrencyName_() string {
 func (f *Finance) CurrencySymbol_() string {
 	f.Currency.Symbol_()
 	return f.Currency.Symbol
+}
+
+// Fake Generate random data for all field
+func (f *Finance) Fake() {
+	f.Account_()
+	f.AccountName_()
+	f.Mask_()
+	f.Amount_()
+	f.TransactionType_()
+	f.CurrencyCode_()
+	f.CurrencyName_()
+	f.CurrencySymbol_()
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (f *Finance) ToJSON() (string, error) {
+	return ToJSON(f)
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (f *Finance) ToXML() (string, error) {
+	return ToJSON(f)
 }

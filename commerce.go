@@ -1,13 +1,11 @@
 package faker
 
 import (
-	"encoding/json"
-	"encoding/xml"
 	"math"
 	"math/rand"
+	"reflect"
 	"strconv"
 	"strings"
-	"reflect"
 )
 
 type ProductName struct {
@@ -62,12 +60,9 @@ func (c *Commerce) Price_(params ...interface{}) string {
 		symbol = params[3].(string)
 	}
 
-
-
 	if min < 0 || max < 0 {
-		return symbol + "0.00";
+		return symbol + "0.00"
 	}
-
 
 	rnd := float64(rand.Intn(max))
 	pow := math.Pow(10, dec)
@@ -106,20 +101,23 @@ func (c *Commerce) Product_() string {
 
 }
 
-func (c *Commerce) ToJSON() (s string, err error) {
-	result, err := json.Marshal(c)
-
-	if err != nil {
-		return
-	}
-	return string(result), err
+// Fake Generate random data for all field
+func (this *Commerce) Fake() {
+	this.Color_()
+	this.Department_()
+	this.Price_()
+	this.ProductName_()
+	this.ProductAdjective_()
+	this.ProductMaterial_()
+	this.Product_()
 }
 
-func (c *Commerce) ToXML() (s string, err error) {
-	result, err := xml.Marshal(c)
+// ToJSON Encode name and its fields to JSON.
+func (c *Commerce) ToJSON() (string, error) {
+	return ToJSON(c)
+}
 
-	if err != nil {
-		return
-	}
-	return string(result), err
+// ToJSON Encode name and its fields to JSON.
+func (c *Commerce) ToXML() (string, error) {
+	return ToJSON(c)
 }
