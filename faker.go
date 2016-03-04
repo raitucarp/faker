@@ -12,7 +12,6 @@ const (
 var gender Gender
 var data interface{}
 
-
 // Faker is complete structure for all type.
 type Faker struct {
 	Name     Name
@@ -34,6 +33,14 @@ type Faker struct {
 func (f *Faker) Fake() {
 	f.Name.Fake()
 	f.Address.Fake()
+	f.Commerce.Fake()
+	f.Company.Fake()
+	f.Finance.Fake()
+	f.Hacker.Fake()
+	f.Image.Fake()
+	f.Internet.Fake()
+	f.Lorem.Fake()
+	f.Phone.Fake()
 
 }
 
@@ -43,7 +50,6 @@ func (f *Faker) generate() {
 		panic(err)
 	}
 }
-
 
 // New Create new Faker
 func New() (f Faker) {
