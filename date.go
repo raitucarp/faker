@@ -3,7 +3,6 @@ package faker
 import (
 	"math"
 	"reflect"
-	"strconv"
 	"time"
 )
 
@@ -11,80 +10,43 @@ type Date struct {
 	time.Time
 }
 
-func (d *Date) validateYears(t reflect.Kind, y interface{}) int {
-	years := 1
-	if t == reflect.String {
-		years, _ = strconv.Atoi(y.(string))
-	} else {
-		years = y.(int)
-	}
-
-	return years
-}
-
-func (d *Date) validateRef(t reflect.Kind, r interface{}) time.Time {
-	ref := time.Now()
-
-	if t == reflect.String {
-		ref, _ = time.Parse("02-01-2006", r.(string))
-	} else if t == reflect.Struct {
-		if v, ok := r.(time.Time); ok {
-			ref = v
-		}
-
-	} else {
-		ref = time.Now()
-	}
-	return ref
-}
-
-func (d *Date) validate(params ...interface{}) (years int, ref time.Time) {
-	types := kindOf(params...)
-
-	years = 1
-	ref = time.Now()
-
-	if len(params) >= 1 {
-		years = d.validateYears(types[0], params[0])
-	}
-
-	if len(params) > 1 {
-		ref = d.validateRef(types[1], params[1])
-	}
-
-	return
-}
-
-func (d *Date) randomUnix(years int, ref time.Time) int64 {
-	// set range
-	min := 1000
-	max := years * 365 * 24 * 3600 * 1000
-
-	rnd := random(min, max)
-
-	return int64(rnd)
-}
-
 // Past_ Generate past date It takes two argument yearsAgo and ref date
 func (d *Date) Past_(params ...interface{}) time.Time {
-	years, ref := d.validate(params...)
-	rnd := d.randomUnix(years, ref)
+	//years, ref := d.validate(params...)
 
-	// get past
-	t := ref.Unix() - int64(rnd)
-	past := time.Unix(t, 0)
+	years := 1
+	ref := time.Now()
 
+	types := typeOf(params...)
+
+	if len(types) >= 1 && types[0] == reflect.TypeOf(years) {
+		years = params[0].(int)
+	}
+
+	if len(types) >= 2 && types[1] == reflect.TypeOf(ref) {
+		ref = params[0].(time.Time)
+	}
+
+	past := ref.AddDate(-years, 0, 0)
 	return past
 }
 
 func (d *Date) Future_(params ...interface{}) time.Time {
-	years, ref := d.validate(params...)
-	rnd := d.randomUnix(years, ref)
 
-	// get past
-	t := ref.Unix() + int64(rnd)
-	future := time.Unix(t, 0)
+	years := 1
+	ref := time.Now()
 
+	types := typeOf(params...)
+
+	if len(types) >= 1 && types[0] == reflect.TypeOf(years) {
+		years = params[0].(int)
+	}
+
+	if len(types) >= 2 && types[1] == reflect.TypeOf(ref) {
+		ref = params[0].(time.Time)
+	}
+
+	future := ref.AddDate(years, 0, 0)
 	return future
 }
 
@@ -120,7 +82,6 @@ func (d *Date) Recent_(params ...interface{}) time.Time {
 	if len(kinds) >= 1 && kinds[0] == reflect.Int {
 		days = params[0].(int)
 	}
-
 
 	min := int(math.Pow(10, 9))
 	if days <= 1 {
@@ -177,4 +138,14 @@ func (d *Date) Weekday_(options ...interface{}) string {
 	source := getData("Date", "Weekday", typ)
 
 	return sample(source)
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (d *Date) ToJSON() (string, error) {
+	return ToJSON(d)
+}
+
+// ToJSON Encode name and its fields to JSON.
+func (d *Date) ToXML() (string, error) {
+	return ToJSON(d)
 }
