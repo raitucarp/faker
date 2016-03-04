@@ -21,22 +21,22 @@ type Commerce struct {
 	ProductName ProductName `json:"product_name"`
 }
 
-func (c *Commerce) Colorʹ() string {
+func (commerce *Commerce) Colorʹ() string {
 	// get color
 	color := getData("Commerce", "Color")
 
 	// assign to commerce
-	c.Color = sample(color)
-	return c.Color
+	commerce.Color = sample(color)
+	return commerce.Color
 }
 
-func (c *Commerce) Departmentʹ() string {
+func (commerce *Commerce) Departmentʹ() string {
 	department := getData("Commerce", "Department")
-	c.Department = sample(department)
-	return c.Department
+	commerce.Department = sample(department)
+	return commerce.Department
 }
 
-func (c *Commerce) Priceʹ(params ...interface{}) string {
+func (commerce *Commerce) Priceʹ(params ...interface{}) string {
 	// max int, dec float64, symbol string
 	min := 0
 	max := 1000
@@ -72,52 +72,52 @@ func (c *Commerce) Priceʹ(params ...interface{}) string {
 	return symbol + result
 }
 
-func (c *Commerce) ProductNameʹ() string {
+func (commerce *Commerce) ProductNameʹ() string {
 	separator := " "
 	productName := []string{
-		c.ProductAdjectiveʹ(),
-		c.ProductMaterialʹ(),
-		c.Productʹ(),
+		commerce.ProductAdjectiveʹ(),
+		commerce.ProductMaterialʹ(),
+		commerce.Productʹ(),
 	}
 	return strings.Join(productName, separator)
 }
 
-func (c *Commerce) ProductAdjectiveʹ() string {
+func (commerce *Commerce) ProductAdjectiveʹ() string {
 	adjective := getData("Commerce", "ProductName", "Adjective")
-	c.ProductName.Adjective = sample(adjective)
-	return c.ProductName.Adjective
+	commerce.ProductName.Adjective = sample(adjective)
+	return commerce.ProductName.Adjective
 }
 
-func (c *Commerce) ProductMaterialʹ() string {
+func (commerce *Commerce) ProductMaterialʹ() string {
 	material := getData("Commerce", "ProductName", "Material")
-	c.ProductName.Material = sample(material)
-	return c.ProductName.Material
+	commerce.ProductName.Material = sample(material)
+	return commerce.ProductName.Material
 }
 
-func (c *Commerce) Productʹ() string {
+func (commerce *Commerce) Productʹ() string {
 	product := getData("Commerce", "ProductName", "Product")
-	c.ProductName.Product = sample(product)
-	return c.ProductName.Product
+	commerce.ProductName.Product = sample(product)
+	return commerce.ProductName.Product
 
 }
 
 // Fake Generate random data for all field
-func (this *Commerce) Fake() {
-	this.Colorʹ()
-	this.Departmentʹ()
-	this.Priceʹ()
-	this.ProductNameʹ()
-	this.ProductAdjectiveʹ()
-	this.ProductMaterialʹ()
-	this.Productʹ()
+func (commerce *Commerce) Fake() {
+	commerce.Colorʹ()
+	commerce.Departmentʹ()
+	commerce.Priceʹ()
+	commerce.ProductNameʹ()
+	commerce.ProductAdjectiveʹ()
+	commerce.ProductMaterialʹ()
+	commerce.Productʹ()
 }
 
 // ToJSON Encode name and its fields to JSON.
-func (c *Commerce) ToJSON() (string, error) {
-	return ToJSON(c)
+func (commerce *Commerce) ToJSON() (string, error) {
+	return ToJSON(commerce)
 }
 
-// ToJSON Encode name and its fields to JSON.
-func (c *Commerce) ToXML() (string, error) {
-	return ToJSON(c)
+// ToXML Encode name and its fields to XML.
+func (commerce *Commerce) ToXML() (string, error) {
+	return ToJSON(commerce)
 }
