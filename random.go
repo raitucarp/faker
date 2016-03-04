@@ -12,10 +12,11 @@ func random(min, max int) int {
 	return rand.Intn(max-min) + min
 }
 
+// UUID generate random uuid.
 func UUID() string {
 	r := regexp.MustCompile(`[xy]`)
-	RFC4122_TEMPLATE := "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
-	result := r.ReplaceAllStringFunc(RFC4122_TEMPLATE, func(placeholder string) string {
+	RFC4122Template := "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+	result := r.ReplaceAllStringFunc(RFC4122Template, func(placeholder string) string {
 		rnd := random(0, 15)
 		var val string
 		if placeholder == "x" {
@@ -29,11 +30,11 @@ func UUID() string {
 	return result
 }
 
+// Boolean generate between truthy or falsy.
 func Boolean() bool {
 	rnd := rand.Int()
 	if rnd%2 == 0 {
 		return true
-	} else {
-		return false
 	}
+	return false
 }
