@@ -10,7 +10,7 @@ type Definitions struct {
 
 func (def Definitions) RandomCurrency() map[string]string {
 	currencies := []currency{}
-	for _, v := range Currency{
+	for _, v := range Currency {
 		if v.Symbol != "" {
 			currencies = append(currencies, v)
 		}
