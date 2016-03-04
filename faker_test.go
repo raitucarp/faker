@@ -148,7 +148,7 @@ func TestFinance(t *testing.T) {
 	tbl := NewTable()
 
 	tbl.SetHeader("Field Name", "Data")
-	tbl.AddData("Account", f.Account_())
+	tbl.AddData("Account", strconv.Itoa(f.Account_()))
 	tbl.AddData("Account Name", f.AccountName_())
 	tbl.AddData("Amount", f.Amount_())
 	tbl.AddData("Mask", f.Mask_())
@@ -188,7 +188,7 @@ func TestImage(t *testing.T) {
 	tbl.SetHeader("Field Name", "Data")
 	tbl.AddData("Image", image.Image_(1028, 728))
 	//tbl.AddData("avatar", image.Image_())
-	tbl.AddData("imageUrl", image.ImageURL("abstract"))
+	//tbl.AddData("imageUrl", image.imageURL("abstract"))
 	tbl.AddData("abstract", image.Abstract_())
 	tbl.AddData("animals", image.Animals_())
 	tbl.AddData("business", image.Business_())
@@ -305,6 +305,22 @@ func TestPhone(t *testing.T) {
 
 	// logging
 	t.Log("Fake Phone\n", tbl.String())
+}
+
+func TestCard(t *testing.T) {
+
+	// logging
+	t.Log("Fake Card\n")
+
+	card := faker.CreateCard()
+	userCard := faker.CreateUserCard()
+	contextualCard := faker.CreateContextualCard()
+	transactionCard := faker.CreateTransaction()
+	t.Log(card.ToJSON())
+	t.Log(userCard.ToJSON())
+	t.Log(contextualCard.ToJSON())
+	t.Log(transactionCard.ToJSON())
+
 }
 
 func checkError(t *testing.T, err error) {
