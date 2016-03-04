@@ -39,7 +39,7 @@ func genderData(gender Gender, base string, dataName string) []string {
 
 }
 
-func (n *Name) withGender(params ...interface{}) bool {
+func (name *Name) withGender(params ...interface{}) bool {
 	types := typeOf(params...)
 
 	// check type
@@ -67,7 +67,7 @@ func randomGender() Gender {
 	return gender[rnd]
 }
 
-// FirstName_ Generate first name.
+// FirstNameʹ Generate first name.
 func (name *Name) FirstNameʹ(params ...interface{}) string {
 	gender := Male
 
@@ -84,7 +84,7 @@ func (name *Name) FirstNameʹ(params ...interface{}) string {
 	return name.FirstName
 }
 
-// LastName_ Generate last name.
+// LastNameʹ Generate last name.
 func (name *Name) LastNameʹ(params ...interface{}) string {
 	gender := Male
 
@@ -103,7 +103,7 @@ func (name *Name) LastNameʹ(params ...interface{}) string {
 	return name.LastName
 }
 
-// FindName_ Generate first name and last name.
+// FindNameʹ Generate first name and last name.
 func (name *Name) FindNameʹ(params ...interface{}) string {
 	var gender interface{}
 	firstName := name.FirstNameʹ()
@@ -154,7 +154,7 @@ func (name *Name) FindNameʹ(params ...interface{}) string {
 	return strings.Join(finalName, " ")
 }
 
-// Suffix_ Generate suffix name.
+// Suffixʹ Generate suffix name.
 func (name *Name) Suffixʹ() string {
 	// get last name list
 	list := getData("Name", "Suffix")
@@ -162,7 +162,7 @@ func (name *Name) Suffixʹ() string {
 	return name.Suffix
 }
 
-// Prefix_ Generate prefix name.
+// Prefixʹ Generate prefix name.
 func (name *Name) Prefixʹ(params ...interface{}) string {
 	var prefix []string
 	if name.withGender(params...) {
@@ -177,7 +177,7 @@ func (name *Name) Prefixʹ(params ...interface{}) string {
 	return name.Prefix
 }
 
-// Title_ Generate title name.
+// Titleʹ Generate title name.
 func (name *Name) Titleʹ() string {
 	descriptor := getData("Name", "Title", "Descriptor")
 	level := getData("Name", "Title", "Level")
@@ -192,7 +192,7 @@ func (name *Name) Titleʹ() string {
 	return name.Title
 }
 
-// JobTitle_ Generate job title.
+// JobTitleʹ Generate job title.
 func (name *Name) JobTitleʹ() string {
 	title := []string{
 		name.JobDescriptorʹ(),
@@ -202,7 +202,7 @@ func (name *Name) JobTitleʹ() string {
 	return strings.Join(title, " ")
 }
 
-// JobDescriptor_ Generate job descriptor
+// JobDescriptorʹ Generate job descriptor
 func (name *Name) JobDescriptorʹ() string {
 	// get last name list
 	descriptors := getData("Name", "Title", "Descriptor")
@@ -210,14 +210,14 @@ func (name *Name) JobDescriptorʹ() string {
 	return name.Job.Descriptor
 }
 
-// JobArea_ Generate job area.
+// JobAreaʹ Generate job area.
 func (name *Name) JobAreaʹ() string {
 	areas := getData("Name", "Title", "Level")
 	name.Job.Area = sample(areas)
 	return name.Job.Area
 }
 
-// JobType_ Generate job type.
+// JobTypeʹ Generate job type.
 func (name *Name) JobTypeʹ() string {
 	types := getData("Name", "Title", "Job")
 	name.Job.Type = sample(types)
@@ -225,25 +225,25 @@ func (name *Name) JobTypeʹ() string {
 }
 
 // Fake Generate random data for all field
-func (this *Name) Fake() {
-	this.FirstNameʹ()
-	this.LastNameʹ()
-	this.FindNameʹ()
-	this.Suffixʹ()
-	this.Prefixʹ()
-	this.Titleʹ()
-	this.JobTitleʹ()
-	this.JobDescriptorʹ()
-	this.JobAreaʹ()
-	this.JobTypeʹ()
+func (name *Name) Fake() {
+	name.FirstNameʹ()
+	name.LastNameʹ()
+	name.FindNameʹ()
+	name.Suffixʹ()
+	name.Prefixʹ()
+	name.Titleʹ()
+	name.JobTitleʹ()
+	name.JobDescriptorʹ()
+	name.JobAreaʹ()
+	name.JobTypeʹ()
 }
 
 // ToJSON Encode name and its fields to JSON.
-func (n *Name) ToJSON() (string, error) {
-	return ToJSON(n)
+func (name *Name) ToJSON() (string, error) {
+	return ToJSON(name)
 }
 
 // ToXML Encode name and its fields to XML.
-func (n *Name) ToXML() (string, error) {
-	return ToJSON(n)
+func (name *Name) ToXML() (string, error) {
+	return ToXML(name)
 }

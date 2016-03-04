@@ -265,5 +265,5 @@ func (i *Internet) ToJSON() (string, error) {
 
 // ToXML Encode name and its fields to XML.
 func (i *Internet) ToXML() (string, error) {
-	return ToJSON(i)
+	return ToXML(i)
 }

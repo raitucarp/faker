@@ -27,17 +27,17 @@ func (phone *Phone) Formatʹ() string {
 }
 
 // Fake Generate random data for all field
-func (p *Phone) Fake() {
-	p.Formatʹ()
-	p.Numberʹ()
+func (phone *Phone) Fake() {
+	phone.Formatʹ()
+	phone.Numberʹ()
 }
 
 // ToJSON Encode name and its fields to JSON.
-func (p *Phone) ToJSON() (string, error) {
-	return ToJSON(p)
+func (phone *Phone) ToJSON() (string, error) {
+	return ToJSON(phone)
 }
 
 // ToXML Encode name and its fields to XML.
-func (p *Phone) ToXML() (string, error) {
-	return ToJSON(p)
+func (phone *Phone) ToXML() (string, error) {
+	return ToXML(phone)
 }

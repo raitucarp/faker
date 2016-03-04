@@ -147,5 +147,5 @@ func (d *Date) ToJSON() (string, error) {
 
 // ToXML Encode name and its fields to XML.
 func (d *Date) ToXML() (string, error) {
-	return ToJSON(d)
+	return ToXML(d)
 }

@@ -56,9 +56,8 @@ func defaultLocaleData(step ...string) (values []string) {
 
 		if index == fieldLength {
 			return val.Interface().([]string)
-		} else {
-			data = val.Interface()
 		}
+		data = val.Interface()
 	}
 
 	return
@@ -87,8 +86,6 @@ func call(field ...string) (result map[string]string) {
 				r := method.Call([]reflect.Value{})
 
 				result = r[0].Interface().(map[string]string)
-				return
-			} else {
 				return
 			}
 		} else {
@@ -204,6 +201,7 @@ func Slugify(s string) string {
 	return result
 }
 
+// ToJSON convert data to JSON format.
 func ToJSON(data interface{}) (s string, err error) {
 	// set first name if defined in params
 	result, err := json.Marshal(data)
@@ -213,6 +211,7 @@ func ToJSON(data interface{}) (s string, err error) {
 	return string(result), err
 }
 
+// ToXML convert data to XML format.
 func ToXML(data interface{}) (s string, err error) {
 	result, err := xml.Marshal(data)
 
