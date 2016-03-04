@@ -107,17 +107,17 @@ func CreateCard() (card Card) {
 	card.Name = f.Name.FindName_()
 	card.Username = f.Internet.Username_()
 	card.Email = f.Internet.Email_()
-	card.Address.StreetA = f.Address.StreetName_()
-	card.Address.StreetB = f.Address.StreetAddress_()
-	card.Address.StreetC = f.Address.StreetAddress_(true)
-	card.Address.StreetD = f.Address.SecondaryAddress_()
-	card.Address.City = f.Address.City_()
-	card.Address.State = f.Address.State_()
-	card.Address.Country = f.Address.Country_()
-	card.Address.ZipCode = f.Address.ZipCode_()
+	card.Address.StreetA = f.Address.StreetNameʹ()
+	card.Address.StreetB = f.Address.StreetAddressʹ()
+	card.Address.StreetC = f.Address.StreetAddressʹ(true)
+	card.Address.StreetD = f.Address.SecondaryAddressʹ()
+	card.Address.City = f.Address.Cityʹ()
+	card.Address.State = f.Address.Stateʹ()
+	card.Address.Country = f.Address.Countryʹ()
+	card.Address.ZipCode = f.Address.ZipCodeʹ()
 	card.Address.Geo = Geo{
-		Longitude: f.Address.Longitude_(),
-		Latitude:  f.Address.Latitude_(),
+		Longitude: f.Address.Longitudeʹ(),
+		Latitude:  f.Address.Latitudeʹ(),
 	}
 	card.Phone = f.Phone.Number_()
 	card.Website = f.Internet.URL_()
@@ -173,13 +173,13 @@ func CreateContextualCard() (card ContextualCard) {
 	card.Email = internet.Email_()
 	card.DateOfBirth = date.Past_(past, "02-01-2016").UTC().String()
 	card.Phone = phone.Number_()
-	card.Address.Street = address.StreetName_()
-	card.Address.Suite = address.SecondaryAddress_()
-	card.Address.City = address.City_()
-	card.Address.ZipCode = address.ZipCode_()
+	card.Address.Street = address.StreetNameʹ()
+	card.Address.Suite = address.SecondaryAddressʹ()
+	card.Address.City = address.Cityʹ()
+	card.Address.ZipCode = address.ZipCodeʹ()
 	card.Address.Geo = Geo{
-		Latitude:  address.Latitude_(),
-		Longitude: address.Longitude_(),
+		Latitude:  address.Latitudeʹ(),
+		Longitude: address.Longitudeʹ(),
 	}
 	card.Phone = phone.Number_()
 	card.Website = internet.DomainName_()
@@ -199,13 +199,13 @@ func CreateUserCard() (card UserCard) {
 	card.Name = name.FindName_()
 	card.Username = internet.Username_()
 	card.Email = internet.Email_()
-	card.Address.Street = address.StreetName_()
-	card.Address.Suite = address.SecondaryAddress_()
-	card.Address.City = address.City_()
-	card.Address.ZipCode = address.ZipCode_()
+	card.Address.Street = address.StreetNameʹ()
+	card.Address.Suite = address.SecondaryAddressʹ()
+	card.Address.City = address.Cityʹ()
+	card.Address.ZipCode = address.ZipCodeʹ()
 	card.Address.Geo = Geo{
-		Latitude:  address.Latitude_(),
-		Longitude: address.Longitude_(),
+		Latitude:  address.Latitudeʹ(),
+		Longitude: address.Longitudeʹ(),
 	}
 	card.Phone = phone.Number_()
 	card.Website = internet.DomainName_()

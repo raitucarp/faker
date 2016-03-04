@@ -9,11 +9,13 @@ import (
 	"strings"
 )
 
+// City contains two field, prefix and suffix.
 type City struct {
 	Prefix string `json:"prefix"`
 	Suffix string `json:"suffix"`
 }
 
+// Street is a street address.
 type Street struct {
 	Name    string `json:"name"`
 	Address string `json:"address"`
@@ -21,11 +23,13 @@ type Street struct {
 	Suffix  string `json:"suffix"`
 }
 
+// Geo is geolocation data. It contains latitude and longitude
 type Geo struct {
 	Latitude  string `json:"latitude"`
 	Longitude string `json:"longitude"`
 }
 
+// Address is complete type of address. For example user needs random Address data.
 type Address struct {
 	ZipCode     string `json:"zip_code"`
 	City        City   `json:"city"`
@@ -39,13 +43,15 @@ type Address struct {
 	Geo         Geo    `json:"geo"`
 }
 
+// Fake fill the address field with random data.
 func (addr *Address) Fake() {
-	addr.CitySuffix_()
-	addr.CityPrefix_()
-	addr.ZipCode_()
+	addr.CitySuffixʹ()
+	addr.CityPrefixʹ()
+	addr.ZipCodeʹ()
 }
 
-func (addr *Address) ZipCode_(params ...interface{}) string {
+// ZipCodeʹ generate zip code for Address.
+func (addr *Address) ZipCodeʹ(params ...interface{}) string {
 	var format string
 
 	kinds := kindOf(params...)
@@ -66,7 +72,8 @@ func (addr *Address) ZipCode_(params ...interface{}) string {
 	return addr.ZipCode
 }
 
-func (addr *Address) City_(params ...interface{}) string {
+// Cityʹ generate random city from data for Address field.
+func (addr *Address) Cityʹ(params ...interface{}) string {
 	var format string
 	// get last name list
 	list := getData("Address", "City")
@@ -85,22 +92,26 @@ func (addr *Address) City_(params ...interface{}) string {
 	return result
 }
 
-func (addr *Address) CityPrefix_() string {
+// CityPrefixʹ generate prefix for City.
+func (addr *Address) CityPrefixʹ() string {
 	// get last name list
 	list := getData("Address", "CityPrefix")
 	addr.City.Prefix = sample(list)
 	return addr.City.Prefix
 }
 
-func (addr *Address) CitySuffix_() string {
+// CitySuffixʹ generate suffix for City.
+func (addr *Address) CitySuffixʹ() string {
 	// get last name list
 	list := getData("Address", "CitySuffix")
 	addr.City.Suffix = sample(list)
 	return addr.City.Suffix
 }
 
-func (addr *Address) StreetName_() string {
-	suffix := addr.StreetSuffix_()
+// StreetNameʹ generate random street name for Address,
+// based on first name and last name from Name type.
+func (addr *Address) StreetNameʹ() string {
+	suffix := addr.StreetSuffixʹ()
 
 	if suffix != "" {
 		suffix = " " + suffix
@@ -117,12 +128,14 @@ func (addr *Address) StreetName_() string {
 	return addr.Street.Name
 }
 
-func (addr *Address) BuildingNumber_() string {
+// BuildingNumberʹ generate building number based on template in locale data.
+func (addr *Address) BuildingNumberʹ() string {
 	format := getData("Address", "BuildingNumber")
 	return replaceSymbolWithNumber(sample(format), '#')
 }
 
-func (addr *Address) StreetAddress_(params ...interface{}) string {
+// StreetAddressʹ generate a street address from locale data.
+func (addr *Address) StreetAddressʹ(params ...interface{}) string {
 	var address string
 	useFullAddress := false
 
@@ -133,66 +146,75 @@ func (addr *Address) StreetAddress_(params ...interface{}) string {
 
 	r := rand.Intn(3)
 	symbol := strings.Repeat("#", 5-r)
-	address = symbol + " " + addr.StreetName_()
+	address = symbol + " " + addr.StreetNameʹ()
 
 	if useFullAddress {
-		address = address + " " + addr.SecondaryAddress_()
+		address = address + " " + addr.SecondaryAddressʹ()
 	}
 
 	addr.Street.Address = address
 	return addr.Street.Address
 }
 
-func (addr *Address) StreetPrefix_() string {
+// StreetPrefixʹ generate a street prefix from locale data.
+func (addr *Address) StreetPrefixʹ() string {
 	prefix := getData("Address", "StreetPrefix")
 	addr.Street.Prefix = sample(prefix)
 	return addr.Street.Prefix
 }
 
-func (addr *Address) StreetSuffix_() string {
+// StreetSuffixʹ generate a street prefix from locale data.
+func (addr *Address) StreetSuffixʹ() string {
 	suffix := getData("Address", "StreetSuffix")
 	addr.Street.Suffix = sample(suffix)
 	return addr.Street.Suffix
 }
 
-func (addr *Address) SecondaryAddress_() string {
+// SecondaryAddressʹ generate a secondary address template from locale data.
+func (addr *Address) SecondaryAddressʹ() string {
 	formats := getData("Address", "SecondaryAddress")
 	secondaryAddress := sample(formats)
 	addr.Secondary = replaceSymbolWithNumber(secondaryAddress, '#')
 	return addr.Secondary
 }
 
-func (addr *Address) County_() string {
+// Countyʹ generate county from locale date.
+func (addr *Address) Countyʹ() string {
 	county := getData("Address", "County")
 	addr.County = sample(county)
 	return addr.County
 }
 
-func (addr *Address) Country_() string {
+// Countryʹ generate country from locale data.
+func (addr *Address) Countryʹ() string {
 	country := getData("Address", "Country")
 	addr.Country = sample(country)
 	return addr.Country
 }
 
-func (addr *Address) CountryCode_() string {
+// CountryCodeʹ generate country code from locale data.
+func (addr *Address) CountryCodeʹ() string {
 	countryCode := getData("Address", "CountryCode")
 	addr.CountryCode = sample(countryCode)
 	return addr.CountryCode
 }
 
-func (addr *Address) State_() string {
+// Stateʹ generate random state from locale data.
+func (addr *Address) Stateʹ() string {
 	state := getData("Address", "State")
 	addr.State = sample(state)
 	return addr.State
 }
 
-func (addr *Address) StateAbbr_() string {
+// StateAbbrʹ generate random abbr of state from locale data.
+func (addr *Address) StateAbbrʹ() string {
 	stateAbbr := getData("Address", "StateAbbr")
 	addr.StateAbbr = sample(stateAbbr)
 	return addr.StateAbbr
 }
 
-func (addr *Address) Latitude_() string {
+// Latitudeʹ generate random latitude position to Geo.
+func (addr *Address) Latitudeʹ() string {
 	rnd := rand.Intn(180 * 10000)
 	latitude := (float64(rnd) / 10000.0) - 90.0
 	addr.Geo.Latitude = strconv.FormatFloat(latitude, 'f', 4, 64)
@@ -200,7 +222,8 @@ func (addr *Address) Latitude_() string {
 
 }
 
-func (addr *Address) Longitude_() string {
+// Longitudeʹ generate random longitude position to Geo.
+func (addr *Address) Longitudeʹ() string {
 	// (faker.random.number(360 * 10000) / 10000.0 - 180.0).toFixed(4);
 	rnd := rand.Intn(360 * 10000)
 	longitude := (float64(rnd) / 10000.0) - 180.0
@@ -208,6 +231,7 @@ func (addr *Address) Longitude_() string {
 	return addr.Geo.Longitude
 }
 
+// ToJSON encodes Address to JSON format.
 func (addr *Address) ToJSON() (s string, err error) {
 	result, err := json.Marshal(addr)
 	if err != nil {
@@ -216,6 +240,7 @@ func (addr *Address) ToJSON() (s string, err error) {
 	return string(result), err
 }
 
+// ToXML encodes Address to XML format.
 func (addr *Address) ToXML() (s string, err error) {
 	result, err := xml.Marshal(addr)
 
