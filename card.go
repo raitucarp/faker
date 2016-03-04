@@ -4,8 +4,7 @@ import (
 	"strings"
 )
 
-//import "math/rand"
-
+// Transaction provides financial transaction structure.
 type Transaction struct {
 	Amount   string
 	Date     string
@@ -15,6 +14,7 @@ type Transaction struct {
 	Account  int
 }
 
+// Post is blog post-like
 type Post struct {
 	Words     []string
 	Sentence  string
@@ -22,6 +22,8 @@ type Post struct {
 	Paragraph string
 }
 
+// ContextualCard is a contextual card.
+// Provide address, and company.
 type ContextualCard struct {
 	Name        string
 	Username    string
@@ -40,6 +42,8 @@ type ContextualCard struct {
 	Company CompanyCard
 }
 
+// Card is a normal card with complete data.
+// It provides address, company, post.
 type Card struct {
 	Name     string
 	Username string
@@ -62,12 +66,14 @@ type Card struct {
 	AccountHistory []Transaction
 }
 
+// CompanyCard describes company, its catch phrase and slogan.
 type CompanyCard struct {
 	Name        string
 	CatchPhrase string
 	Bs          string
 }
 
+// UserCard describes user card, with address and company.
 type UserCard struct {
 	Name     string
 	Username string
@@ -84,22 +90,27 @@ type UserCard struct {
 	Company CompanyCard
 }
 
+// ToJSON convert card data to JSON format.
 func (c *Card) ToJSON() (s string, err error) {
 	return ToJSON(c)
 }
 
+// ToJSON convert contextual card data to JSON format.
 func (c *ContextualCard) ToJSON() (s string, err error) {
 	return ToJSON(c)
 }
 
+// ToJSON convert user card data to JSON format.
 func (c *UserCard) ToJSON() (s string, err error) {
 	return ToJSON(c)
 }
 
+// ToJSON convert transaction data to JSON format.
 func (c *Transaction) ToJSON() (s string, err error) {
 	return ToJSON(c)
 }
 
+// CreateCard create a new card and generate its data with random data.
 func CreateCard() (card Card) {
 	f := New()
 	f.Fake()
@@ -145,6 +156,7 @@ func CreateCard() (card Card) {
 	return
 }
 
+// CreatePost generate new post data
 func CreatePost() (post Post) {
 	l := new(Lorem)
 	l.Fake()
@@ -157,6 +169,7 @@ func CreatePost() (post Post) {
 	return post
 }
 
+// CreateContextualCard create a new contextual card and generate its data.
 func CreateContextualCard() (card ContextualCard) {
 	name := new(Name)
 	internet := new(Internet)
@@ -189,6 +202,7 @@ func CreateContextualCard() (card ContextualCard) {
 	return
 }
 
+// CreateUserCard create a new user card and generate its data.
 func CreateUserCard() (card UserCard) {
 	name := new(Name)
 	internet := new(Internet)
@@ -216,6 +230,7 @@ func CreateUserCard() (card UserCard) {
 	return
 }
 
+// CreateTransaction create a new transaction card and generate its data.
 func CreateTransaction() (transaction Transaction) {
 	finance := new(Finance)
 	finance.Fake()
