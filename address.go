@@ -119,8 +119,8 @@ func (addr *Address) StreetNameʹ() string {
 
 	name := Name{}
 	randCandidate := []string{
-		name.LastName_() + suffix,
-		name.FirstName_() + suffix,
+		name.LastNameʹ() + suffix,
+		name.FirstNameʹ() + suffix,
 	}
 
 	addr.Street.Name = sample(randCandidate)

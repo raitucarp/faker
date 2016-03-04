@@ -115,9 +115,9 @@ func CreateCard() (card Card) {
 	f := New()
 	f.Fake()
 
-	card.Name = f.Name.FindName_()
-	card.Username = f.Internet.Username_()
-	card.Email = f.Internet.Email_()
+	card.Name = f.Name.FindNameʹ()
+	card.Username = f.Internet.Usernameʹ()
+	card.Email = f.Internet.Emailʹ()
 	card.Address.StreetA = f.Address.StreetNameʹ()
 	card.Address.StreetB = f.Address.StreetAddressʹ()
 	card.Address.StreetC = f.Address.StreetAddressʹ(true)
@@ -130,11 +130,11 @@ func CreateCard() (card Card) {
 		Longitude: f.Address.Longitudeʹ(),
 		Latitude:  f.Address.Latitudeʹ(),
 	}
-	card.Phone = f.Phone.Number_()
-	card.Website = f.Internet.URL_()
-	card.Company.Name = f.Company.CompanyName_()
-	card.Company.CatchPhrase = f.Company.CatchPhrase_()
-	card.Company.Bs = f.Company.BS_()
+	card.Phone = f.Phone.Numberʹ()
+	card.Website = f.Internet.URLʹ()
+	card.Company.Name = f.Company.CompanyNameʹ()
+	card.Company.CatchPhrase = f.Company.CatchPhraseʹ()
+	card.Company.Bs = f.Company.BSʹ()
 
 	rnd := random(7, 15)
 	rndTransaction := random(4, 10)
@@ -180,12 +180,12 @@ func CreateContextualCard() (card ContextualCard) {
 
 	past := random(10, 40)
 
-	card.Name = name.FirstName_()
-	card.Username = internet.Username_()
-	card.Avatar = internet.Avatar_()
-	card.Email = internet.Email_()
-	card.DateOfBirth = date.Past_(past, "02-01-2016").UTC().String()
-	card.Phone = phone.Number_()
+	card.Name = name.FirstNameʹ()
+	card.Username = internet.Usernameʹ()
+	card.Avatar = internet.Avatarʹ()
+	card.Email = internet.Emailʹ()
+	card.DateOfBirth = date.Pastʹ(past, "02-01-2016").UTC().String()
+	card.Phone = phone.Numberʹ()
 	card.Address.Street = address.StreetNameʹ()
 	card.Address.Suite = address.SecondaryAddressʹ()
 	card.Address.City = address.Cityʹ()
@@ -194,11 +194,11 @@ func CreateContextualCard() (card ContextualCard) {
 		Latitude:  address.Latitudeʹ(),
 		Longitude: address.Longitudeʹ(),
 	}
-	card.Phone = phone.Number_()
-	card.Website = internet.DomainName_()
-	card.Company.Name = company.CompanyName_()
-	card.Company.CatchPhrase = company.CatchPhrase_()
-	card.Company.Bs = company.BS_()
+	card.Phone = phone.Numberʹ()
+	card.Website = internet.DomainNameʹ()
+	card.Company.Name = company.CompanyNameʹ()
+	card.Company.CatchPhrase = company.CatchPhraseʹ()
+	card.Company.Bs = company.BSʹ()
 	return
 }
 
@@ -210,9 +210,9 @@ func CreateUserCard() (card UserCard) {
 	phone := new(Phone)
 	company := new(Company)
 
-	card.Name = name.FindName_()
-	card.Username = internet.Username_()
-	card.Email = internet.Email_()
+	card.Name = name.FindNameʹ()
+	card.Username = internet.Usernameʹ()
+	card.Email = internet.Emailʹ()
 	card.Address.Street = address.StreetNameʹ()
 	card.Address.Suite = address.SecondaryAddressʹ()
 	card.Address.City = address.Cityʹ()
@@ -221,11 +221,11 @@ func CreateUserCard() (card UserCard) {
 		Latitude:  address.Latitudeʹ(),
 		Longitude: address.Longitudeʹ(),
 	}
-	card.Phone = phone.Number_()
-	card.Website = internet.DomainName_()
-	card.Company.Name = company.CompanyName_()
-	card.Company.CatchPhrase = company.CatchPhrase_()
-	card.Company.Bs = company.BS_()
+	card.Phone = phone.Numberʹ()
+	card.Website = internet.DomainNameʹ()
+	card.Company.Name = company.CompanyNameʹ()
+	card.Company.CatchPhrase = company.CatchPhraseʹ()
+	card.Company.Bs = company.BSʹ()
 
 	return
 }
@@ -241,12 +241,12 @@ func CreateTransaction() (transaction Transaction) {
 	company.Fake()
 
 	transaction.Amount = finance.Amount
-	transaction.Date = date.Past_().String()
+	transaction.Date = date.Pastʹ().String()
 	transaction.Business = company.Name
 	transaction.Type = finance.TransactionType
 	transaction.Account = finance.Account.Number
 
-	name := strings.Join([]string{finance.AccountName_(), finance.Mask_()}, " ")
+	name := strings.Join([]string{finance.AccountNameʹ(), finance.Maskʹ()}, " ")
 	transaction.Name = name
 	return
 }

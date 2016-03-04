@@ -11,7 +11,7 @@ type Date struct {
 }
 
 // Past_ Generate past date It takes two argument yearsAgo and ref date
-func (d *Date) Past_(params ...interface{}) time.Time {
+func (d *Date) Pastʹ(params ...interface{}) time.Time {
 	//years, ref := d.validate(params...)
 
 	years := 1
@@ -31,7 +31,7 @@ func (d *Date) Past_(params ...interface{}) time.Time {
 	return past
 }
 
-func (d *Date) Future_(params ...interface{}) time.Time {
+func (d *Date) Futureʹ(params ...interface{}) time.Time {
 
 	years := 1
 	ref := time.Now()
@@ -50,7 +50,7 @@ func (d *Date) Future_(params ...interface{}) time.Time {
 	return future
 }
 
-func (d *Date) Between_(from, to string, params ...interface{}) time.Time {
+func (d *Date) Betweenʹ(from, to string, params ...interface{}) time.Time {
 	layout := "02-02-2006"
 
 	kinds := kindOf(params...)
@@ -74,7 +74,7 @@ func (d *Date) Between_(from, to string, params ...interface{}) time.Time {
 	return time.Unix(newDate, 0)
 }
 
-func (d *Date) Recent_(params ...interface{}) time.Time {
+func (d *Date) Recentʹ(params ...interface{}) time.Time {
 	days := 1
 	date := time.Now()
 	kinds := kindOf(params...)
@@ -126,14 +126,14 @@ func (d *Date) typCtx(options ...interface{}) string {
 	return typ
 }
 
-func (d *Date) Month_(options ...interface{}) string {
+func (d *Date) Monthʹ(options ...interface{}) string {
 	typ := d.typCtx(options...)
 	source := getData("Date", "Month", typ)
 
 	return sample(source)
 }
 
-func (d *Date) Weekday_(options ...interface{}) string {
+func (d *Date) Weekdayʹ(options ...interface{}) string {
 	typ := d.typCtx(options...)
 	source := getData("Date", "Weekday", typ)
 

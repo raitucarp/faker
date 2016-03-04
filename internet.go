@@ -16,16 +16,16 @@ type InternetDomain struct {
 	Word   string
 }
 
-func (id *InternetDomain) Name_(params ...interface{}) string {
-	id.Word_()
-	id.Suffix_()
+func (id *InternetDomain) Nameʹ(params ...interface{}) string {
+	id.Wordʹ()
+	id.Suffixʹ()
 
 	id.Name = strings.ToLower(id.Word + "." + id.Suffix)
 	return id.Name
 
 }
 
-func (id *InternetDomain) Suffix_(params ...interface{}) string {
+func (id *InternetDomain) Suffixʹ(params ...interface{}) string {
 	tld := getData("Internet", "DomainSuffix", "Generic")
 	name := sample(tld)
 
@@ -41,9 +41,9 @@ func (id *InternetDomain) Suffix_(params ...interface{}) string {
 	return id.Suffix
 }
 
-func (id *InternetDomain) Word_(params ...interface{}) string {
+func (id *InternetDomain) Wordʹ(params ...interface{}) string {
 	name := Name{}
-	firstName := name.FirstName_()
+	firstName := name.FirstNameʹ()
 
 	pattern := `(?i)[\\~#&*{}/:<>?|\"']`
 	r := regexp.MustCompile(pattern)
@@ -59,19 +59,19 @@ type Internet struct {
 	Domain InternetDomain
 }
 
-func (i *Internet) Avatar_() string {
+func (i *Internet) Avatarʹ() string {
 	avatarUri := getData("Internet", "AvatarUri")
 	i.Avatar = sample(avatarUri)
 	return i.Avatar
 }
 
-func (i *Internet) Email_(params ...interface{}) string {
+func (i *Internet) Emailʹ(params ...interface{}) string {
 	freeEmail := getData("Internet", "FreeEmail")
 	provider := sample(freeEmail)
 
 	name := Name{}
-	firstName := name.FirstName_()
-	lastName := name.LastName_()
+	firstName := name.FirstNameʹ()
+	lastName := name.LastNameʹ()
 
 	types := kindOf(params...)
 
@@ -87,7 +87,7 @@ func (i *Internet) Email_(params ...interface{}) string {
 		provider = params[2].(string)
 	}
 
-	i.Email = Slugify(i.Username_(firstName, lastName)) + "@" + provider
+	i.Email = Slugify(i.Usernameʹ(firstName, lastName)) + "@" + provider
 
 	return i.Email
 }
@@ -97,14 +97,14 @@ func (i *Internet) ExampleEmail(params ...interface{}) string {
 	provider := sample(exEmail)
 
 	params = append(params, provider)
-	i.Email_(params...)
+	i.Emailʹ(params...)
 	return i.Email
 }
 
-func (i *Internet) Username_(params ...interface{}) string {
+func (i *Internet) Usernameʹ(params ...interface{}) string {
 	name := Name{}
-	firstName := name.FirstName_()
-	lastName := name.LastName_()
+	firstName := name.FirstNameʹ()
+	lastName := name.LastNameʹ()
 
 	types := kindOf(params...)
 	if len(types) >= 1 && types[0] == reflect.String {
@@ -146,35 +146,35 @@ func (i *Internet) Username_(params ...interface{}) string {
 	return i.Username
 }
 
-func (i *Internet) Protocol_() string {
+func (i *Internet) Protocolʹ() string {
 	protocol := getData("Internet", "Protocol")
 	i.Protocol = sample(protocol)
 	return i.Protocol
 }
 
-func (i *Internet) URL_() string {
-	i.Protocol_()
-	i.Domain.Name_()
+func (i *Internet) URLʹ() string {
+	i.Protocolʹ()
+	i.Domain.Nameʹ()
 
 	return i.Protocol + "://" + i.Domain.Name
 }
 
-func (i *Internet) DomainName_() string {
-	i.Domain.Name_()
+func (i *Internet) DomainNameʹ() string {
+	i.Domain.Nameʹ()
 	return i.Domain.Name
 }
 
-func (i *Internet) DomainSuffix_() string {
-	i.Domain.Suffix_()
+func (i *Internet) DomainSuffixʹ() string {
+	i.Domain.Suffixʹ()
 	return i.Domain.Suffix
 }
 
-func (i *Internet) DomainWord_() string {
-	i.Domain.Word_()
+func (i *Internet) DomainWordʹ() string {
+	i.Domain.Wordʹ()
 	return i.Domain.Word
 }
 
-func (i *Internet) IP_() string {
+func (i *Internet) IPʹ() string {
 	subnet := []string{}
 	for i := 0; i < 4; i++ {
 		rnd := rand.Intn(256)
@@ -185,11 +185,11 @@ func (i *Internet) IP_() string {
 	return i.IP
 }
 
-func (i *Internet) UserAgent_() string {
+func (i *Internet) UserAgentʹ() string {
 	return ""
 }
 
-func (i *Internet) Color_(params ...interface{}) string {
+func (i *Internet) Colorʹ(params ...interface{}) string {
 	base := map[string]int{}
 	base["red"] = 0
 	base["green"] = 0
@@ -222,7 +222,7 @@ func (i *Internet) Color_(params ...interface{}) string {
 	return i.Color
 }
 
-func (i *Internet) Mac_() string {
+func (i *Internet) Macʹ() string {
 	var mac string
 	for i := 0; i < 12; i++ {
 		mac += strconv.FormatInt(int64(rand.Intn(17)), 16)
@@ -236,26 +236,26 @@ func (i *Internet) Mac_() string {
 }
 
 // TODO: password
-func (i *Internet) Password_() string {
+func (i *Internet) Passwordʹ() string {
 	return ""
 }
 
 // Fake Generate random data for all field
 func (i *Internet) Fake() {
-	i.Avatar_()
-	i.Email_()
+	i.Avatarʹ()
+	i.Emailʹ()
 	i.ExampleEmail()
-	i.Username_()
-	i.Protocol_()
-	i.URL_()
-	i.DomainName_()
-	i.DomainSuffix_()
-	i.DomainWord_()
-	i.IP_()
-	i.UserAgent_()
-	i.Color_()
-	i.Mac_()
-	i.Password_()
+	i.Usernameʹ()
+	i.Protocolʹ()
+	i.URLʹ()
+	i.DomainNameʹ()
+	i.DomainSuffixʹ()
+	i.DomainWordʹ()
+	i.IPʹ()
+	i.UserAgentʹ()
+	i.Colorʹ()
+	i.Macʹ()
+	i.Passwordʹ()
 }
 
 // ToJSON Encode name and its fields to JSON.

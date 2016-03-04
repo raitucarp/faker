@@ -21,12 +21,12 @@ type Company struct {
 	BusinessSlogan BusinessSlogan
 }
 
-func (comp *Company) Suffixes_() []string {
+func (comp *Company) Suffixesʹ() []string {
 	suffixes := getData("Company", "Suffix")
 	return suffixes
 }
 
-func (comp *Company) CompanyName_(params ...interface{}) string {
+func (comp *Company) CompanyNameʹ(params ...interface{}) string {
 	formats := getData("Company", "Name")
 	format := sample(formats)
 
@@ -43,13 +43,13 @@ func (comp *Company) CompanyName_(params ...interface{}) string {
 	return comp.Name
 }
 
-func (comp *Company) CompanySuffix_() string {
-	suffixes := comp.Suffixes_()
+func (comp *Company) CompanySuffixʹ() string {
+	suffixes := comp.Suffixesʹ()
 	comp.Suffix = sample(suffixes)
 	return comp.Suffix
 }
 
-func (comp *Company) CatchPhrase_() string {
+func (comp *Company) CatchPhraseʹ() string {
 	template := getData("Company", "CatchPhrase", "Template")
 	catchPhrase := sample(template)
 	result, err := Parse(catchPhrase)
@@ -60,7 +60,7 @@ func (comp *Company) CatchPhrase_() string {
 	return result
 }
 
-func (comp *Company) BS_() string {
+func (comp *Company) BSʹ() string {
 	template := getData("Company", "BusinessSlogan", "Template")
 	bs := sample(template)
 	result, err := Parse(bs)
@@ -71,37 +71,37 @@ func (comp *Company) BS_() string {
 	return result
 }
 
-func (comp *Company) CatchPhraseAdjective_() string {
+func (comp *Company) CatchPhraseAdjectiveʹ() string {
 	adjective := getData("Company", "CatchPhrase", "Adjective")
 	comp.CatchPhrase.Adjective = sample(adjective)
 	return comp.CatchPhrase.Adjective
 }
 
-func (comp *Company) CatchPhraseDescriptor_() string {
+func (comp *Company) CatchPhraseDescriptorʹ() string {
 	descriptor := getData("Company", "CatchPhrase", "Descriptor")
 	comp.CatchPhrase.Descriptor = sample(descriptor)
 	return comp.CatchPhrase.Descriptor
 }
 
-func (comp *Company) CatchPhraseNoun_() string {
+func (comp *Company) CatchPhraseNounʹ() string {
 	noun := getData("Company", "CatchPhrase", "Noun")
 	comp.CatchPhrase.Noun = sample(noun)
 	return comp.CatchPhrase.Noun
 }
 
-func (comp *Company) BsAdjective_() string {
+func (comp *Company) BsAdjectiveʹ() string {
 	adjective := getData("Company", "BusinessSlogan", "Adjective")
 	comp.BusinessSlogan.Adjective = sample(adjective)
 	return comp.BusinessSlogan.Adjective
 }
 
-func (comp *Company) BsBuzz_() string {
+func (comp *Company) BsBuzzʹ() string {
 	verb := getData("Company", "BusinessSlogan", "Buzz")
 	comp.BusinessSlogan.Buzz = sample(verb)
 	return comp.BusinessSlogan.Buzz
 }
 
-func (comp *Company) BsNoun_() string {
+func (comp *Company) BsNounʹ() string {
 	noun := getData("Company", "BusinessSlogan", "Noun")
 	comp.BusinessSlogan.Noun = sample(noun)
 	return comp.BusinessSlogan.Noun
@@ -109,17 +109,17 @@ func (comp *Company) BsNoun_() string {
 
 // Fake Generate random data for all field
 func (company *Company) Fake() {
-	company.Suffixes_()
-	company.CompanyName_()
-	company.CompanySuffix_()
-	company.CatchPhrase_()
-	company.BS_()
-	company.CatchPhraseAdjective_()
-	company.CatchPhraseDescriptor_()
-	company.CatchPhraseNoun_()
-	company.BsAdjective_()
-	company.BsBuzz_()
-	company.BsNoun_()
+	company.Suffixesʹ()
+	company.CompanyNameʹ()
+	company.CompanySuffixʹ()
+	company.CatchPhraseʹ()
+	company.BSʹ()
+	company.CatchPhraseAdjectiveʹ()
+	company.CatchPhraseDescriptorʹ()
+	company.CatchPhraseNounʹ()
+	company.BsAdjectiveʹ()
+	company.BsBuzzʹ()
+	company.BsNounʹ()
 }
 
 // ToJSON Encode name and its fields to JSON.

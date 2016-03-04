@@ -21,7 +21,7 @@ type Commerce struct {
 	ProductName ProductName `json:"product_name"`
 }
 
-func (c *Commerce) Color_() string {
+func (c *Commerce) Colorʹ() string {
 	// get color
 	color := getData("Commerce", "Color")
 
@@ -30,13 +30,13 @@ func (c *Commerce) Color_() string {
 	return c.Color
 }
 
-func (c *Commerce) Department_() string {
+func (c *Commerce) Departmentʹ() string {
 	department := getData("Commerce", "Department")
 	c.Department = sample(department)
 	return c.Department
 }
 
-func (c *Commerce) Price_(params ...interface{}) string {
+func (c *Commerce) Priceʹ(params ...interface{}) string {
 	// max int, dec float64, symbol string
 	min := 0
 	max := 1000
@@ -72,29 +72,29 @@ func (c *Commerce) Price_(params ...interface{}) string {
 	return symbol + result
 }
 
-func (c *Commerce) ProductName_() string {
+func (c *Commerce) ProductNameʹ() string {
 	separator := " "
 	productName := []string{
-		c.ProductAdjective_(),
-		c.ProductMaterial_(),
-		c.Product_(),
+		c.ProductAdjectiveʹ(),
+		c.ProductMaterialʹ(),
+		c.Productʹ(),
 	}
 	return strings.Join(productName, separator)
 }
 
-func (c *Commerce) ProductAdjective_() string {
+func (c *Commerce) ProductAdjectiveʹ() string {
 	adjective := getData("Commerce", "ProductName", "Adjective")
 	c.ProductName.Adjective = sample(adjective)
 	return c.ProductName.Adjective
 }
 
-func (c *Commerce) ProductMaterial_() string {
+func (c *Commerce) ProductMaterialʹ() string {
 	material := getData("Commerce", "ProductName", "Material")
 	c.ProductName.Material = sample(material)
 	return c.ProductName.Material
 }
 
-func (c *Commerce) Product_() string {
+func (c *Commerce) Productʹ() string {
 	product := getData("Commerce", "ProductName", "Product")
 	c.ProductName.Product = sample(product)
 	return c.ProductName.Product
@@ -103,13 +103,13 @@ func (c *Commerce) Product_() string {
 
 // Fake Generate random data for all field
 func (this *Commerce) Fake() {
-	this.Color_()
-	this.Department_()
-	this.Price_()
-	this.ProductName_()
-	this.ProductAdjective_()
-	this.ProductMaterial_()
-	this.Product_()
+	this.Colorʹ()
+	this.Departmentʹ()
+	this.Priceʹ()
+	this.ProductNameʹ()
+	this.ProductAdjectiveʹ()
+	this.ProductMaterialʹ()
+	this.Productʹ()
 }
 
 // ToJSON Encode name and its fields to JSON.

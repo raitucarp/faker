@@ -15,13 +15,13 @@ type Lorem struct {
 	Paragraphs string
 }
 
-func (l *Lorem) Word_() string {
+func (l *Lorem) Wordʹ() string {
 	word := getData("Lorem", "Words")
 	l.Word = sample(word)
 	return l.Word
 }
 
-func (l *Lorem) Words_(params ...interface{}) []string {
+func (l *Lorem) Wordsʹ(params ...interface{}) []string {
 	length := 3
 
 	types := kindOf(params...)
@@ -33,7 +33,7 @@ func (l *Lorem) Words_(params ...interface{}) []string {
 	var words []string
 
 	for i := 0; i < length; i++ {
-		words = append(words, l.Word_())
+		words = append(words, l.Wordʹ())
 	}
 
 	l.Words = words
@@ -41,7 +41,7 @@ func (l *Lorem) Words_(params ...interface{}) []string {
 	return l.Words
 }
 
-func (l *Lorem) Sentence_(params ...interface{}) string {
+func (l *Lorem) Sentenceʹ(params ...interface{}) string {
 	wordCount := random(3, 10)
 
 	types := kindOf(params...)
@@ -49,7 +49,7 @@ func (l *Lorem) Sentence_(params ...interface{}) string {
 		wordCount = params[0].(int)
 	}
 
-	words := l.Words_(wordCount)
+	words := l.Wordsʹ(wordCount)
 	sentence := strings.Join(words, " ")
 	sentence = strings.ToLower(sentence)
 	sentence = strings.ToUpper(string(sentence[0])) + sentence[1:]
@@ -60,7 +60,7 @@ func (l *Lorem) Sentence_(params ...interface{}) string {
 	return l.Sentence
 }
 
-func (l *Lorem) Sentences_(params ...interface{}) string {
+func (l *Lorem) Sentencesʹ(params ...interface{}) string {
 	sentenceCount := random(2, 6)
 	separator := " "
 
@@ -76,7 +76,7 @@ func (l *Lorem) Sentences_(params ...interface{}) string {
 	}
 
 	for i := 0; i < sentenceCount; i++ {
-		sentence := l.Sentence_()
+		sentence := l.Sentenceʹ()
 		sentences = append(sentences, sentence)
 	}
 
@@ -85,7 +85,7 @@ func (l *Lorem) Sentences_(params ...interface{}) string {
 	return l.Sentences
 }
 
-func (l *Lorem) Paragraph_(params ...interface{}) string {
+func (l *Lorem) Paragraphʹ(params ...interface{}) string {
 	sentenceCount := 3
 
 	types := kindOf(params...)
@@ -94,13 +94,13 @@ func (l *Lorem) Paragraph_(params ...interface{}) string {
 	}
 
 	sentenceCount += random(1, 3)
-	l.Paragraph = l.Sentences_(sentenceCount)
+	l.Paragraph = l.Sentencesʹ(sentenceCount)
 
 	return l.Paragraph
 
 }
 
-func (l *Lorem) Paragraphs_(params ...interface{}) string {
+func (l *Lorem) Paragraphsʹ(params ...interface{}) string {
 	separator := "\n\r"
 	paragraphCount := 3
 
@@ -114,7 +114,7 @@ func (l *Lorem) Paragraphs_(params ...interface{}) string {
 	}
 	paragraphs := []string{}
 	for i := 0; i < paragraphCount; i++ {
-		paragraphs = append(paragraphs, l.Paragraph_())
+		paragraphs = append(paragraphs, l.Paragraphʹ())
 	}
 	l.Paragraphs = strings.Join(paragraphs, separator)
 	return l.Paragraphs
@@ -125,17 +125,17 @@ func (l *Lorem) Text(params ...interface{}) (val string) {
 	rnd := rand.Intn(6)
 	switch rnd {
 	case 0:
-		l.Word_()
+		l.Wordʹ()
 	case 1:
-		l.Words_()
+		l.Wordsʹ()
 	case 2:
-		l.Sentence_()
+		l.Sentenceʹ()
 	case 3:
-		l.Sentences_()
+		l.Sentencesʹ()
 	case 4:
-		l.Paragraph_()
+		l.Paragraphʹ()
 	case 5:
-		l.Paragraphs_()
+		l.Paragraphsʹ()
 	}
 
 	return
@@ -143,12 +143,12 @@ func (l *Lorem) Text(params ...interface{}) (val string) {
 
 // Fake Generate random data for all field
 func (l *Lorem) Fake() {
-	l.Word_()
-	l.Words_()
-	l.Sentence_()
-	l.Sentences_()
-	l.Paragraph_()
-	l.Paragraphs_()
+	l.Wordʹ()
+	l.Wordsʹ()
+	l.Sentenceʹ()
+	l.Sentencesʹ()
+	l.Paragraphʹ()
+	l.Paragraphsʹ()
 }
 
 // ToJSON Encode name and its fields to JSON.

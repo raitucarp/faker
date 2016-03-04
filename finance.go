@@ -12,7 +12,7 @@ type FinanceAccount struct {
 	Name   string
 }
 
-func (fa *FinanceAccount) Number_(args ...interface{}) int {
+func (fa *FinanceAccount) Numberʹ(args ...interface{}) int {
 	types := kindOf(args)
 
 	// default length
@@ -38,7 +38,7 @@ func (fa *FinanceAccount) Number_(args ...interface{}) int {
 	return fa.Number
 }
 
-func (fa *FinanceAccount) Name_() string {
+func (fa *FinanceAccount) Nameʹ() string {
 	name := getData("Finance", "AccountType")
 	fa.Name = strings.Join([]string{sample(name), "Account"}, " ")
 	return fa.Name
@@ -58,17 +58,17 @@ func (fc *FinanceCurrency) pick() {
 	fc.Symbol = randomCurrency["Symbol"]
 }
 
-func (fc *FinanceCurrency) Code_() string {
+func (fc *FinanceCurrency) Codeʹ() string {
 	fc.pick()
 	return fc.Code
 }
 
-func (fc *FinanceCurrency) Name_() string {
+func (fc *FinanceCurrency) Nameʹ() string {
 	fc.pick()
 	return fc.Name
 }
 
-func (fc *FinanceCurrency) Symbol_() string {
+func (fc *FinanceCurrency) Symbolʹ() string {
 	for {
 		if fc.Symbol == "" {
 			fc.pick()
@@ -87,17 +87,17 @@ type Finance struct {
 	Currency        FinanceCurrency
 }
 
-func (f *Finance) Account_(args ...interface{}) int {
-	f.Account.Number_(args...)
+func (f *Finance) Accountʹ(args ...interface{}) int {
+	f.Account.Numberʹ(args...)
 	return f.Account.Number
 }
 
-func (f *Finance) AccountName_() string {
-	f.Account.Name_()
+func (f *Finance) AccountNameʹ() string {
+	f.Account.Nameʹ()
 	return f.Account.Name
 }
 
-func (f *Finance) Mask_(params ...interface{}) string {
+func (f *Finance) Maskʹ(params ...interface{}) string {
 	length := 4
 	parenthesis := true
 	ellipsis := true
@@ -129,7 +129,7 @@ func (f *Finance) Mask_(params ...interface{}) string {
 	return replaceSymbolWithNumber(template, '#')
 }
 
-func (f *Finance) Amount_(params ...interface{}) string {
+func (f *Finance) Amountʹ(params ...interface{}) string {
 	min := 0
 	max := 1000
 	dec := float64(2)
@@ -163,37 +163,37 @@ func (f *Finance) Amount_(params ...interface{}) string {
 	return f.Amount
 }
 
-func (f *Finance) TransactionType_() string {
+func (f *Finance) TransactionTypeʹ() string {
 	transactionTypes := getData("Finance", "TransactionType")
 	f.TransactionType = sample(transactionTypes)
 	return f.TransactionType
 }
 
-func (f *Finance) CurrencyCode_() string {
-	f.Currency.Code_()
+func (f *Finance) CurrencyCodeʹ() string {
+	f.Currency.Codeʹ()
 	return f.Currency.Code
 }
 
-func (f *Finance) CurrencyName_() string {
-	f.Currency.Name_()
+func (f *Finance) CurrencyNameʹ() string {
+	f.Currency.Nameʹ()
 	return f.Currency.Name
 }
 
-func (f *Finance) CurrencySymbol_() string {
-	f.Currency.Symbol_()
+func (f *Finance) CurrencySymbolʹ() string {
+	f.Currency.Symbolʹ()
 	return f.Currency.Symbol
 }
 
 // Fake Generate random data for all field
 func (f *Finance) Fake() {
-	f.Account_()
-	f.AccountName_()
-	f.Mask_()
-	f.Amount_()
-	f.TransactionType_()
-	f.CurrencyCode_()
-	f.CurrencyName_()
-	f.CurrencySymbol_()
+	f.Accountʹ()
+	f.AccountNameʹ()
+	f.Maskʹ()
+	f.Amountʹ()
+	f.TransactionTypeʹ()
+	f.CurrencyCodeʹ()
+	f.CurrencyNameʹ()
+	f.CurrencySymbolʹ()
 }
 
 // ToJSON Encode name and its fields to JSON.

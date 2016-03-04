@@ -68,7 +68,7 @@ func randomGender() Gender {
 }
 
 // FirstName_ Generate first name.
-func (name *Name) FirstName_(params ...interface{}) string {
+func (name *Name) FirstNameʹ(params ...interface{}) string {
 	gender := Male
 
 	var firstNames []string
@@ -85,7 +85,7 @@ func (name *Name) FirstName_(params ...interface{}) string {
 }
 
 // LastName_ Generate last name.
-func (name *Name) LastName_(params ...interface{}) string {
+func (name *Name) LastNameʹ(params ...interface{}) string {
 	gender := Male
 
 	var lastNames []string
@@ -104,10 +104,10 @@ func (name *Name) LastName_(params ...interface{}) string {
 }
 
 // FindName_ Generate first name and last name.
-func (name *Name) FindName_(params ...interface{}) string {
+func (name *Name) FindNameʹ(params ...interface{}) string {
 	var gender interface{}
-	firstName := name.FirstName_()
-	lastName := name.LastName_()
+	firstName := name.FirstNameʹ()
+	lastName := name.LastNameʹ()
 	var prefix, suffix string
 	r := rand.Intn(8)
 
@@ -121,8 +121,8 @@ func (name *Name) FindName_(params ...interface{}) string {
 	if len(kinds) >= 3 {
 		if types[2] == reflect.TypeOf(Male) {
 			gender = getGender(gender)
-			firstName = name.FirstName_(gender)
-			lastName = name.LastName_(gender)
+			firstName = name.FirstNameʹ(gender)
+			lastName = name.LastNameʹ(gender)
 		}
 	}
 
@@ -138,7 +138,7 @@ func (name *Name) FindName_(params ...interface{}) string {
 	finalName := []string{firstName, lastName}
 
 	if r == 0 && len(params) >= 3 {
-		prefix = name.Prefix_(gender)
+		prefix = name.Prefixʹ(gender)
 		if prefix != "" {
 			finalName = []string{prefix, firstName, lastName}
 			return strings.Join(finalName, " ")
@@ -146,7 +146,7 @@ func (name *Name) FindName_(params ...interface{}) string {
 	}
 
 	if r == 1 {
-		suffix = name.Suffix_()
+		suffix = name.Suffixʹ()
 		finalName = []string{firstName, lastName, suffix}
 		return strings.Join(finalName, " ")
 	}
@@ -155,7 +155,7 @@ func (name *Name) FindName_(params ...interface{}) string {
 }
 
 // Suffix_ Generate suffix name.
-func (name *Name) Suffix_() string {
+func (name *Name) Suffixʹ() string {
 	// get last name list
 	list := getData("Name", "Suffix")
 	name.Suffix = sample(list)
@@ -163,7 +163,7 @@ func (name *Name) Suffix_() string {
 }
 
 // Prefix_ Generate prefix name.
-func (name *Name) Prefix_(params ...interface{}) string {
+func (name *Name) Prefixʹ(params ...interface{}) string {
 	var prefix []string
 	if name.withGender(params...) {
 		gender = getGender(params[0])
@@ -178,7 +178,7 @@ func (name *Name) Prefix_(params ...interface{}) string {
 }
 
 // Title_ Generate title name.
-func (name *Name) Title_() string {
+func (name *Name) Titleʹ() string {
 	descriptor := getData("Name", "Title", "Descriptor")
 	level := getData("Name", "Title", "Level")
 	job := getData("Name", "Title", "Job")
@@ -193,17 +193,17 @@ func (name *Name) Title_() string {
 }
 
 // JobTitle_ Generate job title.
-func (name *Name) JobTitle_() string {
+func (name *Name) JobTitleʹ() string {
 	title := []string{
-		name.JobDescriptor_(),
-		name.JobArea_(),
-		name.JobType_(),
+		name.JobDescriptorʹ(),
+		name.JobAreaʹ(),
+		name.JobTypeʹ(),
 	}
 	return strings.Join(title, " ")
 }
 
 // JobDescriptor_ Generate job descriptor
-func (name *Name) JobDescriptor_() string {
+func (name *Name) JobDescriptorʹ() string {
 	// get last name list
 	descriptors := getData("Name", "Title", "Descriptor")
 	name.Job.Descriptor = sample(descriptors)
@@ -211,14 +211,14 @@ func (name *Name) JobDescriptor_() string {
 }
 
 // JobArea_ Generate job area.
-func (name *Name) JobArea_() string {
+func (name *Name) JobAreaʹ() string {
 	areas := getData("Name", "Title", "Level")
 	name.Job.Area = sample(areas)
 	return name.Job.Area
 }
 
 // JobType_ Generate job type.
-func (name *Name) JobType_() string {
+func (name *Name) JobTypeʹ() string {
 	types := getData("Name", "Title", "Job")
 	name.Job.Type = sample(types)
 	return name.Job.Type
@@ -226,16 +226,16 @@ func (name *Name) JobType_() string {
 
 // Fake Generate random data for all field
 func (this *Name) Fake() {
-	this.FirstName_()
-	this.LastName_()
-	this.FindName_()
-	this.Suffix_()
-	this.Prefix_()
-	this.Title_()
-	this.JobTitle_()
-	this.JobDescriptor_()
-	this.JobArea_()
-	this.JobType_()
+	this.FirstNameʹ()
+	this.LastNameʹ()
+	this.FindNameʹ()
+	this.Suffixʹ()
+	this.Prefixʹ()
+	this.Titleʹ()
+	this.JobTitleʹ()
+	this.JobDescriptorʹ()
+	this.JobAreaʹ()
+	this.JobTypeʹ()
 }
 
 // ToJSON Encode name and its fields to JSON.

@@ -9,37 +9,37 @@ type Hacker struct {
 	Phrase       string
 }
 
-func (h *Hacker) Abbreviation_() string {
+func (h *Hacker) Abbreviationʹ() string {
 	abbr := getData("Hacker", "Abbreviation")
 	h.Abbreviation = sample(abbr)
 	return h.Abbreviation
 }
 
-func (h *Hacker) Adjective_() string {
+func (h *Hacker) Adjectiveʹ() string {
 	adjective := getData("Hacker", "Adjective")
 	h.Adjective = sample(adjective)
 	return h.Adjective
 }
 
-func (h *Hacker) Noun_() string {
+func (h *Hacker) Nounʹ() string {
 	noun := getData("Hacker", "Noun")
 	h.Noun = sample(noun)
 	return h.Noun
 }
 
-func (h *Hacker) Verb_() string {
+func (h *Hacker) Verbʹ() string {
 	verb := getData("Hacker", "Verb")
 	h.Verb = sample(verb)
 	return h.Verb
 }
 
-func (h *Hacker) IngVerb_() string {
+func (h *Hacker) IngVerbʹ() string {
 	ingVerb := getData("Hacker", "IngVerb")
 	h.IngVerb = sample(ingVerb)
 	return h.IngVerb
 }
 
-func (h *Hacker) Phrase_() string {
+func (h *Hacker) Phraseʹ() string {
 	phrase := getData("Hacker", "Phrase")
 	template := sample(phrase)
 
@@ -54,12 +54,12 @@ func (h *Hacker) Phrase_() string {
 
 // Fake Generate random data for all field
 func (h *Hacker) Fake() {
-	h.Abbreviation_()
-	h.Adjective_()
-	h.Noun_()
-	h.Verb_()
-	h.IngVerb_()
-	h.Phrase_()
+	h.Abbreviationʹ()
+	h.Adjectiveʹ()
+	h.Nounʹ()
+	h.Verbʹ()
+	h.IngVerbʹ()
+	h.Phraseʹ()
 }
 
 // ToJSON Encode name and its fields to JSON.

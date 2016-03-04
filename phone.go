@@ -7,8 +7,8 @@ type Phone struct {
 	Format string
 }
 
-func (phone *Phone) Number_(params ...interface{}) string {
-	format := phone.Format_()
+func (phone *Phone) Numberʹ(params ...interface{}) string {
+	format := phone.Formatʹ()
 
 	types := kindOf(params...)
 	if len(types) >= 1 && types[0] == reflect.String {
@@ -20,7 +20,7 @@ func (phone *Phone) Number_(params ...interface{}) string {
 	return phone.Number
 }
 
-func (phone *Phone) Format_() string {
+func (phone *Phone) Formatʹ() string {
 	format := getData("Phone", "PhoneFormat")
 	phone.Format = sample(format)
 	return phone.Format
@@ -28,8 +28,8 @@ func (phone *Phone) Format_() string {
 
 // Fake Generate random data for all field
 func (p *Phone) Fake() {
-	p.Format_()
-	p.Number_()
+	p.Formatʹ()
+	p.Numberʹ()
 }
 
 // ToJSON Encode name and its fields to JSON.

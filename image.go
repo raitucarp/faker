@@ -20,36 +20,36 @@ type Image struct {
 	Url      string
 }
 
-func (image *Image) Image_(params ...interface{}) string {
+func (image *Image) Imageʹ(params ...interface{}) string {
 	category := sample(imageCategories)
 
 	switch category {
 	case "abstract":
-		image.Abstract_(params...)
+		image.Abstractʹ(params...)
 	case "animals":
-		image.Animals_(params...)
+		image.Animalsʹ(params...)
 	case "business":
-		image.Business_(params...)
+		image.Businessʹ(params...)
 	case "cats":
-		image.Cats_(params...)
+		image.Catsʹ(params...)
 	case "city":
-		image.City_(params...)
+		image.Cityʹ(params...)
 	case "food":
-		image.Food_(params...)
+		image.Foodʹ(params...)
 	case "nightlife":
-		image.Nightlife_(params...)
+		image.Nightlifeʹ(params...)
 	case "fashion":
-		image.Fashion_(params...)
+		image.Fashionʹ(params...)
 	case "people":
-		image.People_(params...)
+		image.Peopleʹ(params...)
 	case "nature":
-		image.Nature_(params...)
+		image.Natureʹ(params...)
 	case "sports":
-		image.Sports_(params...)
+		image.Sportsʹ(params...)
 	case "technics":
-		image.Technics_(params...)
+		image.Technicsʹ(params...)
 	case "transport":
-		image.Transport_(params...)
+		image.Transportʹ(params...)
 	}
 
 	return image.Url
@@ -90,73 +90,73 @@ func (image *Image) imageURL(category string, params ...interface{}) string {
 	return image.Url
 }
 
-func (image *Image) Avatar_(params ...interface{}) string {
+func (image *Image) Avatarʹ(params ...interface{}) string {
 
 	internet := Internet{}
-	return internet.Avatar_()
+	return internet.Avatarʹ()
 }
 
-func (image *Image) Abstract_(params ...interface{}) string {
+func (image *Image) Abstractʹ(params ...interface{}) string {
 	image.imageURL("abstract", params...)
 	return image.Url
 }
 
-func (image *Image) Animals_(params ...interface{}) string {
+func (image *Image) Animalsʹ(params ...interface{}) string {
 	image.imageURL("animals", params...)
 	return image.Url
 }
 
-func (image *Image) Business_(params ...interface{}) string {
+func (image *Image) Businessʹ(params ...interface{}) string {
 	image.imageURL("business", params...)
 	return image.Url
 }
 
-func (image *Image) Cats_(params ...interface{}) string {
+func (image *Image) Catsʹ(params ...interface{}) string {
 	image.imageURL("cats", params...)
 	return image.Url
 }
 
-func (image *Image) City_(params ...interface{}) string {
+func (image *Image) Cityʹ(params ...interface{}) string {
 	image.imageURL("city", params...)
 	return image.Url
 }
 
-func (image *Image) Food_(params ...interface{}) string {
+func (image *Image) Foodʹ(params ...interface{}) string {
 	image.imageURL("food", params...)
 	return image.Url
 }
-func (image *Image) Nightlife_(params ...interface{}) string {
+func (image *Image) Nightlifeʹ(params ...interface{}) string {
 	image.imageURL("nightlife", params...)
 	return image.Url
 }
-func (image *Image) Fashion_(params ...interface{}) string {
+func (image *Image) Fashionʹ(params ...interface{}) string {
 	image.imageURL("fashion", params...)
 	return image.Url
 }
-func (image *Image) People_(params ...interface{}) string {
+func (image *Image) Peopleʹ(params ...interface{}) string {
 	image.imageURL("people", params...)
 	return image.Url
 }
-func (image *Image) Nature_(params ...interface{}) string {
+func (image *Image) Natureʹ(params ...interface{}) string {
 	image.imageURL("nature", params...)
 	return image.Url
 }
-func (image *Image) Sports_(params ...interface{}) string {
+func (image *Image) Sportsʹ(params ...interface{}) string {
 	image.imageURL("sports", params...)
 	return image.Url
 }
-func (image *Image) Technics_(params ...interface{}) string {
+func (image *Image) Technicsʹ(params ...interface{}) string {
 	image.imageURL("technics", params...)
 	return image.Url
 }
-func (image *Image) Transport_(params ...interface{}) string {
+func (image *Image) Transportʹ(params ...interface{}) string {
 	image.imageURL("transport", params...)
 	return image.Url
 }
 
 // Fake Generate random data for all field
 func (image *Image) Fake() {
-	image.Image_()
+	image.Imageʹ()
 }
 
 // ToJSON Encode name and its fields to JSON.
