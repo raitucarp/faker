@@ -67,7 +67,7 @@ func (h *Hacker) ToJSON() (string, error) {
 	return ToJSON(h)
 }
 
-// ToJSON Encode name and its fields to JSON.
+// ToXML Encode name and its fields to XML.
 func (h *Hacker) ToXML() (string, error) {
 	return ToJSON(h)
 }

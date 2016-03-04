@@ -127,7 +127,7 @@ func (company *Company) ToJSON() (string, error) {
 	return ToJSON(company)
 }
 
-// ToJSON Encode name and its fields to JSON.
+// ToXML Encode name and its fields to XML.
 func (company *Company) ToXML() (string, error) {
 	return ToJSON(company)
 }

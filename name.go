@@ -243,7 +243,7 @@ func (n *Name) ToJSON() (string, error) {
 	return ToJSON(n)
 }
 
-// ToJSON Encode name and its fields to JSON.
+// ToXML Encode name and its fields to XML.
 func (n *Name) ToXML() (string, error) {
 	return ToJSON(n)
 }

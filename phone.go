@@ -37,7 +37,7 @@ func (p *Phone) ToJSON() (string, error) {
 	return ToJSON(p)
 }
 
-// ToJSON Encode name and its fields to JSON.
+// ToXML Encode name and its fields to XML.
 func (p *Phone) ToXML() (string, error) {
 	return ToJSON(p)
 }

@@ -201,7 +201,7 @@ func (f *Finance) ToJSON() (string, error) {
 	return ToJSON(f)
 }
 
-// ToJSON Encode name and its fields to JSON.
+// ToXML Encode name and its fields to XML.
 func (f *Finance) ToXML() (string, error) {
 	return ToJSON(f)
 }

@@ -156,7 +156,7 @@ func (l *Lorem) ToJSON() (string, error) {
 	return ToJSON(l)
 }
 
-// ToJSON Encode name and its fields to JSON.
+// ToXML Encode name and its fields to XML.
 func (l *Lorem) ToXML() (string, error) {
 	return ToJSON(l)
 }

@@ -164,7 +164,7 @@ func (image *Image) ToJSON() (string, error) {
 	return ToJSON(image)
 }
 
-// ToJSON Encode name and its fields to JSON.
+// ToXML Encode name and its fields to XML.
 func (image *Image) ToXML() (string, error) {
 	return ToJSON(image)
 }
