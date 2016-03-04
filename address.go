@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"math/rand"
-	"strconv"
 	"reflect"
+	"strconv"
 	"strings"
 )
 
@@ -21,6 +21,11 @@ type Street struct {
 	Suffix  string `json:"suffix"`
 }
 
+type Geo struct {
+	Latitude  string `json:"latitude"`
+	Longitude string `json:"longitude"`
+}
+
 type Address struct {
 	ZipCode     string `json:"zip_code"`
 	City        City   `json:"city"`
@@ -31,8 +36,7 @@ type Address struct {
 	CountryCode string `json:"country_code"`
 	State       string `json:"state"`
 	StateAbbr   string `json:"state_abbr"`
-	Latitude    string `json:"latitude"`
-	Longitude   string `json:"longitude"`
+	Geo         Geo    `json:"geo"`
 }
 
 func (addr *Address) Fake() {
@@ -66,7 +70,6 @@ func (addr *Address) City_(params ...interface{}) string {
 	var format string
 	// get last name list
 	list := getData("Address", "City")
-
 
 	kinds := kindOf(params...)
 	if len(kinds) >= 1 && kinds[0] == reflect.String {
@@ -129,7 +132,7 @@ func (addr *Address) StreetAddress_(params ...interface{}) string {
 	}
 
 	r := rand.Intn(3)
-	symbol := strings.Repeat("#", 5 - r)
+	symbol := strings.Repeat("#", 5-r)
 	address = symbol + " " + addr.StreetName_()
 
 	if useFullAddress {
@@ -192,8 +195,8 @@ func (addr *Address) StateAbbr_() string {
 func (addr *Address) Latitude_() string {
 	rnd := rand.Intn(180 * 10000)
 	latitude := (float64(rnd) / 10000.0) - 90.0
-	addr.Latitude = strconv.FormatFloat(latitude, 'f', 4, 64)
-	return addr.Latitude
+	addr.Geo.Latitude = strconv.FormatFloat(latitude, 'f', 4, 64)
+	return addr.Geo.Latitude
 
 }
 
@@ -201,8 +204,8 @@ func (addr *Address) Longitude_() string {
 	// (faker.random.number(360 * 10000) / 10000.0 - 180.0).toFixed(4);
 	rnd := rand.Intn(360 * 10000)
 	longitude := (float64(rnd) / 10000.0) - 180.0
-	addr.Longitude = strconv.FormatFloat(longitude, 'f', 4, 64)
-	return addr.Longitude
+	addr.Geo.Longitude = strconv.FormatFloat(longitude, 'f', 4, 64)
+	return addr.Geo.Longitude
 }
 
 func (addr *Address) ToJSON() (s string, err error) {
