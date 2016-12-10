@@ -111,9 +111,6 @@ func (name *Name) FindNameʹ(params ...interface{}) string {
 	var prefix, suffix string
 	r := rand.Intn(8)
 
-	/*prefix := name.Prefix_()
-	suffix := name.Suffix_()*/
-
 	kinds := kindOf(params...)
 	types := typeOf(params...)
 
