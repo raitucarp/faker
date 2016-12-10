@@ -2,10 +2,11 @@ package faker_test
 
 import (
 	"bytes"
-	"github.com/olekukonko/tablewriter"
-	"github.com/raitucarp/faker"
 	"strings"
 	"testing"
+
+	"github.com/olekukonko/tablewriter"
+	"github.com/raitucarp/faker"
 	//"time"
 	"strconv"
 )
@@ -39,6 +40,32 @@ func NewTable() Table {
 	t.table = tablewriter.NewWriter(t.buf)
 
 	return t
+}
+
+func TestStaticSeed(t *testing.T) {
+	f := faker.New()
+
+	faker.StaticSeed(1234)
+	name := f.Name.FirstNameʹ()
+	name2 := f.Name.FirstNameʹ()
+
+	if name != name2 {
+		t.Fatal("name is not equals to name2, static seed failed",
+			"name = ", name,
+			"and name2 = ", name2)
+	}
+
+	faker.ResetStaticSeed()
+	currentSeed := faker.GetStaticSeed()
+	if currentSeed != 0 {
+		t.Fatal("seed not reset")
+	}
+
+	name3 := f.Name.FirstNameʹ()
+	name4 := f.Name.FirstNameʹ()
+	if name3 == name4 {
+		t.Fatal("seed is resetted but still same")
+	}
 }
 
 // Testing begin here
