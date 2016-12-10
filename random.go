@@ -7,9 +7,29 @@ import (
 	"time"
 )
 
+var seed int64
+
+func StaticSeed(s int64) {
+	seed = s
+}
+
+func ResetStaticSeed() {
+	seed = 0
+}
+
+func GetStaticSeed() int64 {
+	return seed
+}
+
 func random(min, max int) int {
-	rand.Seed(time.Now().Unix() + int64(rand.Int()))
-	return rand.Intn(max-min) + min
+	if seed > 0 {
+		rand.Seed(seed)
+	} else {
+		rand.Seed(time.Now().Unix() + int64(rand.Int()))
+	}
+
+	intn := rand.Intn(max-min) + min
+	return intn
 }
 
 // UUID generate random uuid.
